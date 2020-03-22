@@ -12,7 +12,7 @@ html {
   background-color: #ecf9ff;
 }
 
-body {
+.main {
   color: #272727;
   font-family: 'Quicksand', serif;
   font-style: normal;
@@ -32,13 +32,13 @@ h1 {
     text-align: center;
 }
 
-img {
+.card_img {
   height: auto;
   max-width: 100%;
   vertical-align: middle;
 }
 
-.btn {
+.card_btn {
   color: #ffffff;
   padding: 0.8rem;
   font-size: 14px;
