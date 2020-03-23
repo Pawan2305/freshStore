@@ -14,7 +14,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
                 
   getAll(): Observable<Login[]> {
-    return this.http.get(`${this.baseUrl}/list`).pipe(
+    return this.http.get(`${this.baseUrl}/list.php`).pipe(
       map((res) => {
         this.login = res['data'];
         return this.login;
