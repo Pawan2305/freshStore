@@ -1,41 +1,38 @@
-<form  name="theForm" (submit)="" >
-  <div class="modal-header text-center"></form>
-    <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<form #f="ngForm" name="theForm" (submit)="onSignUp(f)">
+  <div class="modal-header text-center">
+      <h4 class="modal-title w-100 font-weight-bold">sign in</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="modal-body mx-3">
-    <div class="md-form mb-5">
-      <i class="fas fa-envelope prefix grey-text"></i>
-        <input type="firstname" id="defaultForm-firstname" class="form-control validate" 
-        name="firstname"
-        placeholder="Enter Your First name">
+      </button>
     </div>
+    <div class="modal-body mx-3">
+      <div class="md-form mb-5">
+        <i class="fas fa-envelope prefix grey-text"></i>
+        <input type="text" id="firstName" class="form-control validate" 
+        name="firstNameId"
+        
+        placeholder="Enter your firstName">
+      </div>
 
-  <div class="modal-body mx-3">
-    <div class="md-form mb-5">
-      <i class="fas fa-envelope prefix grey-text"></i>
-        <input type="email" id="defaultForm-email" class="form-control validate" 
-        name="loginId"
-        placeholder="Your Login Id">
-    </div>
+      <div class="md-form mb-5">
+        <i class="fas fa-envelope prefix grey-text"></i>
+        <input type="text" id="lastName" class="form-control validate" 
+        name="lastNameId"
+        
+        placeholder="Enter your LastName">
+      </div>
   
-  <div class="md-form mb-4">
-    <i class="fas fa-lock prefix grey-text"></i>
-      <input type="password" id="defaultForm-pass" class="form-control validate" 
+      <div class="md-form mb-4">
+        <i class="fas fa-lock prefix grey-text"></i>
+        <input type="password" id="defaultForm-pass" class="form-control validate" 
         name="pswd"
         placeholder="Your Password">
-  </div>
-
-  </div>
-
-  </div>
+      </div>
   
-  <div class="modal-footer d-flex justify-content-center">
-    <button class="btn btn-default">Login</button>
-  </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+      <button class="btn btn-default">Login</button>
+    </div>
   
-</form>
+  </form>
   
