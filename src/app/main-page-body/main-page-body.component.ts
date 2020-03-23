@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageBodyComponent implements OnInit {
 
+  count = [0,1,2];
+
   constructor() { }
 
   ngOnInit(): void {
