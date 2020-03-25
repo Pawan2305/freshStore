@@ -12,6 +12,7 @@ import { MainPageBodyComponent } from './main-page-body/main-page-body.component
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FooterComponent } from './footer/footer.component';
 import { CustomerComponent } from './customer/customer.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CustomerComponent } from './customer/customer.component';
     LoginComponent,
     MainPageBodyComponent,
     SignUpComponent,
-    FooterComponent
+    FooterComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
