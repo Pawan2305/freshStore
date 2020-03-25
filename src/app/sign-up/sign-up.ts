@@ -2,7 +2,7 @@ export class signup {
 
     constructor(
       public firstName = '',
-      public lastName = '',
+      public phoneNo = '',
       public email = ''
     ){}
   }

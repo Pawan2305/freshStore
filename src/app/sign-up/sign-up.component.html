@@ -94,7 +94,7 @@
 
 <form  novalidate (ngSubmit)="save()" [formGroup]="signupForm">
   <div class="modal-header text-center">
-      <h4 class="modal-title w-100 font-weight-bold">sign in</h4>
+      <h4 class="modal-title w-100 font-weight-bold">SIGN UP</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -116,7 +116,7 @@
             Please enter your first name.
           </span>
           <span *ngIf="signupForm.get('firstName').errors?.minlength">
-            The first name must be longer than 3 characters.
+            The first name must be longer than 10 characters.
           </span>
         </span>
       </div>
@@ -124,19 +124,19 @@
       <div class="md-form mb-5">
         <i class="fas fa-envelope prefix grey-text"></i>
         <input  class="form-control validate" 
-        id="lastNameId"
+        id="phoneNoId"
         type="text"
-        placeholder="Last Name (required)"
+        placeholder="Phone No (required)"
         required
-        maxlength="50"
-        formControlName="lastName"
-        [ngClass]="{'is-invalid': (signupForm.get('lastName').touched || signupForm.get('lastName').dirty) && !signupForm.get('lastName').valid }" />
+        maxlength="10"
+        formControlName="phoneNo"
+        [ngClass]="{'is-invalid': (signupForm.get('phoneNo').touched || signupForm.get('phoneNo').dirty) && !signupForm.get('phoneNo').valid }" />
  <span class="invalid-feedback">
-   <span *ngIf="signupForm.get('lastName').errors?.required">
-     Please enter your last name.
+   <span *ngIf="signupForm.get('phoneNo').errors?.required">
+     Please enter your phone no.
    </span>
-   <span *ngIf="signupForm.get('lastName').errors?.maxlength">
-     The last name must be less than 50 characters.
+   <span *ngIf="signupForm.get('phoneno').errors?.maxlength">
+     Phone no. is not valid.
    </span>
  </span>
       </div>
@@ -164,9 +164,10 @@
     </div>
     <div class="modal-footer d-flex justify-content-center">
       <button class="btn btn-default"
+
       [title]="signupForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-                  [disabled]="!signupForm.valid"
-      >Sign Up</button>
+                  [disabled]="!signupForm.valid">
+      Sign Up</button>
     </div>
   
   </form>
