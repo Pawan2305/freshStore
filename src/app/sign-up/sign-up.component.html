@@ -1,38 +1,97 @@
-<form #f="ngForm" name="theForm" (submit)="onSignUp(f)">
-  <div class="modal-header text-center">
-      <h4 class="modal-title w-100 font-weight-bold">sign in</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body mx-3">
-      <div class="md-form mb-5">
-        <i class="fas fa-envelope prefix grey-text"></i>
-        <input type="text" id="firstName" class="form-control validate" 
-        name="firstNameId"
-        
-        placeholder="Enter your firstName">
+<div class="card">
+  <div class="card-header">
+    Sign Up!
+  </div>
+
+  <div class="card-body">
+    <form novalidate
+          (ngSubmit)="save()"
+          [formGroup]="signupForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="firstNameId">First Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="firstNameId"
+                 type="text"
+                 placeholder="First Name (required)"
+                 required
+                 minlength="3"
+                 formControlName="firstName"
+                 [ngClass]="{'is-invalid': (signupForm.get('firstName').touched || signupForm.get('firstName').dirty) && !signupForm.get('firstName').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="signupForm.get('firstName').errors?.required">
+              Please enter your first name.
+            </span>
+            <span *ngIf="signupForm.get('firstName').errors?.minlength">
+              The first name must be longer than 3 characters.
+            </span>
+          </span>
+        </div>
       </div>
 
-      <div class="md-form mb-5">
-        <i class="fas fa-envelope prefix grey-text"></i>
-        <input type="text" id="lastName" class="form-control validate" 
-        name="lastNameId"
-        
-        placeholder="Enter your LastName">
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="lastNameId">Last Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="lastNameId"
+                 type="text"
+                 placeholder="Last Name (required)"
+                 required
+                 maxlength="50"
+                 formControlName="lastName"
+                 [ngClass]="{'is-invalid': (signupForm.get('lastName').touched || signupForm.get('lastName').dirty) && !signupForm.get('lastName').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="signupForm.get('lastName').errors?.required">
+              Please enter your last name.
+            </span>
+            <span *ngIf="signupForm.get('lastName').errors?.maxlength">
+              The last name must be less than 50 characters.
+            </span>
+          </span>
+        </div>
       </div>
-  
-      <div class="md-form mb-4">
-        <i class="fas fa-lock prefix grey-text"></i>
-        <input type="password" id="defaultForm-pass" class="form-control validate" 
-        name="pswd"
-        placeholder="Your Password">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="emailId">Email</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="emailId"
+                 type="email"
+                 placeholder="Email (required)"
+                 required
+                 email
+                 formControlName="email"
+                 [ngClass]="{'is-invalid': (signupForm.get('email').touched || signupForm.get('email').dirty) && !signupForm.get('email').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="signupForm.get('email').errors?.required">
+              Please enter your email address.
+            </span>
+            <span *ngIf="signupForm.get('email').errors?.email">
+              Please enter a valid email address.
+            </span>
+          </span>
+        </div>
       </div>
-  
-    </div>
-    <div class="modal-footer d-flex justify-content-center">
-      <button class="btn btn-default">Login</button>
-    </div>
-  
-  </form>
-  
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  type="submit"
+                  style="width:80px"
+                  [title]="signupForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!signupForm.valid">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>Dirty: {{ signupForm.dirty }}
+<br>Touched: {{ signupForm.touched }}
+<br>Valid: {{ signupForm.valid }}
+<br>Value: {{ signupForm.value | json }} 

@@ -20,8 +20,7 @@ import { CustomerComponent } from './customer/customer.component';
     LoginComponent,
     MainPageBodyComponent,
     SignUpComponent,
-    FooterComponent,
-    CustomerComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
