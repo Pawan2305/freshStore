@@ -1,10 +1,9 @@
 export class signup {
 
     constructor(
-      public firstName = '',
-      public phoneNo = '',
+      public name = '',
+      public phoneNo = 0,
       public email = '',
       public password = '',
-      public confirmPassword = ''
     ){}
   }
