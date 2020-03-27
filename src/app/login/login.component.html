@@ -1,47 +1,43 @@
-<form novalidate (ngSubmit)="onLogin()" [formGroup]="loginForm">
-  <div class="modal-header text-center">
-      <h4 class="modal-title w-100 font-weight-bold">sign in</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+<form novalidate (ngSubmit)="onLogin()" [formGroup]="loginForm">  
+ <!--Body-->
+  <div class="modal-body mb-1">
+    <div class="md-form form-sm mb-5">
+      <i class="fas fa-envelope prefix"></i>
+      <input type="email" id="emailId" class="form-control form-control-sm validate" 
+          placeholder="Your email"
+          formControlName = "loginId"
+          [ngClass]="{'is-invalid': (loginForm.get('loginId').touched || loginForm.get('loginId').dirty) && !loginForm.get('loginId').valid }" 
+          >
+            <span class="invalid-feedback" *ngIf="loginForm.get('loginId').errors?.required">
+              Please enter your email id.
+            </span>
     </div>
-    <div class="modal-body mx-3">
-      <div class="md-form mb-5">
-        <i class="fas fa-envelope prefix grey-text"></i>
-        <input class="form-control validate" 
-        id="firstNameId"
-                 type="email"
-                 placeholder="Your login Id"
-                 formControlName="loginId"
-                 [ngClass]="{'is-invalid': (loginForm.get('loginId').touched || loginForm.get('loginId').dirty) && !loginForm.get('loginId').valid }" 
-        >
-        <span class="invalid-feedback">
-          <span *ngIf="loginForm.get('loginId').errors?.required">
-            Please enter your email id.
-          </span>
+
+    <div class="md-form form-sm mb-4">
+      <i class="fas fa-lock prefix"></i>
+      <input type="password" id="passwordId" class="form-control form-control-sm validate"
+      formControlName="password"
+      placeholder="Your Password"
+      [ngClass]="{'is-invalid': (loginForm.get('password').touched || loginForm.get('password').dirty) && !loginForm.get('password').valid }" >
+        
+      <span class="invalid-feedback">
+        <span *ngIf="loginForm.get('password').errors?.required">
+         Please enter your Password.
         </span>
-      </div>
-  
-      <div class="md-form mb-4">
-        <i class="fas fa-lock prefix grey-text"></i>
-        <input type="password" id="defaultForm-pass" class="form-control validate" 
-        name="pswd"
-        formControlName ="password"
-        placeholder="Your Password"
-        [ngClass]="{'is-invalid': (loginForm.get('password').touched || loginForm.get('password').dirty) && !loginForm.get('password').valid }" >
-        <span class="invalid-feedback">
-          <span *ngIf="loginForm.get('password').errors?.required">
-            Please enter your Password.
-          </span>
-        </span>
-      </div>
-  
+      </span>
     </div>
-    <div class="modal-footer d-flex justify-content-center">
-      <button class="btn btn-default"
+    <div class="text-center mt-2">
+      <button class="btn btn-info"
       [title]="loginForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-      [disabled]="!loginForm.valid">Login</button>
+      [disabled]="!loginForm.valid">Log in <i class="fas fa-sign-in ml-1"></i></button>
     </div>
-  
-  </form>
-  
+  </div>
+  <!--Footer-->
+  <div class="modal-footer">
+    <div class="options text-center text-md-right mt-1">
+      <p>Not a member? <a href="#panel8" class="blue-text">Sign Up</a></p>
+      <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+    </div>
+    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+  </div>
+</form>

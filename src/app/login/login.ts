@@ -8,4 +8,4 @@ export class Login {
           this.loginId = loginId;
           this.pswd = pswd;
         }
-    }
+}

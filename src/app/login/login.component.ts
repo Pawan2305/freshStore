@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { Login } from './login';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +19,13 @@ export class LoginComponent implements OnInit {
   log = new Login('','');
   
   constructor(private loginService: LoginService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       loginId: ['', Validators.required],
-      password: ''
+      password: ['', Validators.required]
     });
   }
 
@@ -33,8 +35,13 @@ export class LoginComponent implements OnInit {
         this.login = res;
         this.login.forEach(element => {
           if(element.loginId === this.loginForm.get('loginId').value && element.pswd === this.loginForm.get('password').value){
-            window.alert("Welcome "+element.loginId);
-            console.log("Login Successfull");
+            if(element.loginId === "admin"){
+              console.log("admin");
+              this.router.navigate(['admin/add-product']);
+            }else{
+              console.log("Login Successfull");
+              this.router.navigate(['main-page']);
+            }
           }
         });
       },
