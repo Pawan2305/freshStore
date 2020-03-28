@@ -3,12 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { AppComponent } from './app.component';
 import { MainPageBodyComponent } from './main-page-body/main-page-body.component';
+import { AdminViewComponent } from './admin/admin-view/admin-view.component';
+import { LiveProductComponent } from './admin/live-product/live-product.component';
 
 
 const routes: Routes = [
-  { path: 'admin/add-product', component: AddProductComponent},
+  { path: 'admin', component: AdminViewComponent},
   { path: 'main-page', component: MainPageBodyComponent},
-  { path: '', redirectTo: '/main-page', pathMatch:"full"}
+  { path: 'admin/live-orders', component: LiveProductComponent},
+  { path: '', redirectTo: 'main-page', pathMatch:"full"}
 ];
 
 @NgModule({

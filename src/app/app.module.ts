@@ -15,7 +15,9 @@ import { CustomerComponent } from './customer/customer.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 import { AdminViewComponent } from './admin/admin-view/admin-view.component';
-import { LiveProductComponent } from './admin/live-product/live-product.component';
+import { MainPageComponent } from './admin/main-page/main-page.component';
+import { EditProductComponent} from './admin/edit-product/edit-product.component';
+
 
 @NgModule({
   declarations: [
@@ -27,8 +29,10 @@ import { LiveProductComponent } from './admin/live-product/live-product.componen
     FooterComponent,
     AddProductComponent,
     AdminNavbarComponent,
+    MainPageComponent,
     AdminViewComponent,
-    LiveProductComponent
+    EditProductComponent
+
   ],
   imports: [
     BrowserModule,
