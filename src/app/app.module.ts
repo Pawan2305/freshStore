@@ -13,6 +13,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { FooterComponent } from './footer/footer.component';
 import { CustomerComponent } from './customer/customer.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
+import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AddProductComponent } from './admin/add-product/add-product.component';
     MainPageBodyComponent,
     SignUpComponent,
     FooterComponent,
-    AddProductComponent
+    AddProductComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,
