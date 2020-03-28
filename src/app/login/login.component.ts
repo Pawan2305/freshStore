@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
             if(element.loginId === "admin"){
               console.log("admin");
               this.loginForm.reset();
-              window.alert("Welcome "+element.loginId);
               this.router.navigate(['admin']);
             }else{
               console.log("Login Successfull");

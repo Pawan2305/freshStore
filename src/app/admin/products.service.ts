@@ -10,8 +10,18 @@ import { Products } from './product';
 export class ProductsService {
 
   baseUrl = 'http://localhost/api';
+  product: Products[];
                 
   constructor(private http: HttpClient) { }
+
+  getAllProducts(): Observable<Products[]> {
+    return this.http.get(`${this.baseUrl}/productList.php`).pipe(
+      map((res) => {
+        this.product = res['data'];
+        return this.product;
+    }),
+    catchError(this.handleError));
+  }
 
   addProduct(productData: Products): Observable<boolean> {
     return this.http.post(`${this.baseUrl}/addProduct.php`, { data: productData })

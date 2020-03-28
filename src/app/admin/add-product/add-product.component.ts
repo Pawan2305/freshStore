@@ -40,11 +40,19 @@ export class AddProductComponent implements OnInit {
     console.log(this.product);
     this.productService.addProduct(this.product).subscribe((res)=>{
       if(res=== true){
-        window.alert("Product Added");
+        //window.alert("Product Added");
         this.addProductForm.reset();
+        window.location.reload();
       }else{
         console.log("Unable to add data");
       }
-  });
+    });
+
+    this.productService.getAllProducts().subscribe(
+      (res: Products[]) =>{
+        console.log(res);
+      }
+    );
+
   }
 }
