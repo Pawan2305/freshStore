@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loginError: boolean= false;
 
   login: Login[];
   error = '';
@@ -37,11 +38,17 @@ export class LoginComponent implements OnInit {
           if(element.loginId === this.loginForm.get('loginId').value && element.pswd === this.loginForm.get('password').value){
             if(element.loginId === "admin"){
               console.log("admin");
+              this.loginForm.reset();
+              window.alert("Welcome "+element.loginId);
               this.router.navigate(['admin/add-product']);
             }else{
               console.log("Login Successfull");
+              this.loginForm.reset();
+              window.alert("Welcome "+element.loginId);
               this.router.navigate(['main-page']);
             }
+          }else{
+           this.loginError = true;
           }
         });
       },
@@ -49,6 +56,10 @@ export class LoginComponent implements OnInit {
         this.error = err;
       }
     );
+
+    if(this.loginError){
+      window.alert("Email Id and password did not match.\nTry Again!!!");
+    }
   }
 
 }
