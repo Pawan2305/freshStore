@@ -23,32 +23,40 @@
                     <div class="modal-body mx-3">
                         <div class="md-form mb-5">
                             <input type="text" id="inputName" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="inputName">Name</label>
+                            <label data-error="wrong" data-success="right" for="inputName">Product Name</label>
                         </div>
     
                         <div class="md-form mb-5">
                             <input type="text" id="inputPosition" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="inputPosition">Position</label>
+                            <label data-error="wrong" data-success="right" for="inputPosition">Category</label>
                         </div>
+
     
                         <div class="md-form mb-5">
                             <input type="text" id="inputOfficeInput" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="inputOfficeInput">Office</label>
+                            <label data-error="wrong" data-success="right" for="inputOfficeInput">Our Price</label>
                         </div>
     
                         <div class="md-form mb-5">
                             <input type="text" id="inputAge" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="inputAge">Age</label>
+                            <label data-error="wrong" data-success="right" for="inputAge">Market Price</label>
                         </div>
     
-                        <div class="md-form mb-5">
-                            <input type="date" id="inputDate" class="form-control" placeholder="Select Date">
-                            <label data-error="wrong" data-success="right" for="inputDate"></label>
-                        </div>
+                        
     
                         <div class="md-form mb-5">
                             <input type="text" id="inputSalary" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="inputSalary">Salary</label>
+                            <label data-error="wrong" data-success="right" for="inputSalary">Stock</label>
+                        </div>
+
+                        <div class="file-field">
+                          <a class="btn-floating peach-gradient mt-0 float-left">
+                            <i class="fas fa-paperclip" aria-hidden="true"></i>
+                            <input type="file">
+                          </a>
+                          <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload your file">
+                          </div>
                         </div>
     
                     </div>
@@ -78,32 +86,29 @@
                     <div class="modal-body mx-3">
                         <div class="md-form mb-5">
                             <input type="text" id="formNameEdit" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="formNameEdit">Name</label>
+                            <label data-error="wrong" data-success="right" for="formNameEdit">Product Name</label>
                         </div>
     
                         <div class="md-form mb-5">
                             <input type="text" id="formPositionEdit" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="formPositionEdit">Position</label>
+                            <label data-error="wrong" data-success="right" for="formPositionEdit">Category</label>
                         </div>
     
                         <div class="md-form mb-5">
                             <input type="text" id="formOfficeEdit" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="formOfficeEdit">Office</label>
+                            <label data-error="wrong" data-success="right" for="formOfficeEdit">Our Price</label>
                         </div>
             
                         <div class="md-form mb-5">
                             <input type="text" id="formAgeEdit" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="formAgeEdit">Age</label>
+                            <label data-error="wrong" data-success="right" for="formAgeEdit">Market Price</label>
                         </div>
             
-                        <div class="md-form mb-5">
-                            <input type="text" id="formDateEdit" class="form-control datepicker">
-                            <label data-error="wrong" data-success="right" for="formDateEdit">Date</label>
-                        </div>
+          
             
                         <div class="md-form mb-5">
                             <input type="text" id="formSalaryEdit" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="formSalaryEdit">Salary</label>
+                            <label data-error="wrong" data-success="right" for="formSalaryEdit">Stock</label>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-center editInsideWrapper">
@@ -153,22 +158,22 @@
     <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th class="th-sm">Name
+          <th class="th-sm">Product Name
   
           </th>
-          <th class="th-sm">Position
+          <th class="th-sm">Category
   
           </th>
-          <th class="th-sm">Office
+          <th class="th-sm">Our price
   
           </th>
-          <th class="th-sm">Age
+          <th class="th-sm">Market Price
   
           </th>
           <th class="th-sm">Start date
   
           </th>
-          <th class="th-sm">Salary
+          <th class="th-sm">Stock
   
           </th>
         </tr>
