@@ -7,6 +7,7 @@ import { AdminViewComponent } from './admin/admin-view/admin-view.component';
 import { LiveProductComponent } from './admin/live-product/live-product.component';
 import { DeliveredOrderComponent } from './admin/delivered-order/delivered-order.component';
 import { CancelledOrderComponent } from './admin/cancelled-order/cancelled-order.component';
+import { SalesSummaryComponent } from './admin/sales-summary/sales-summary.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'admin/live-orders', component: LiveProductComponent},
   { path: 'admin/delivered-orders', component: DeliveredOrderComponent},
   { path: 'admin/cancelled-orders', component: CancelledOrderComponent},
+  { path: 'admin/sales-summary', component: SalesSummaryComponent},
   { path: '', redirectTo: 'main-page', pathMatch:"full"}
 ];
 
