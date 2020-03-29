@@ -1,6 +1,6 @@
 <div>
     <button (click)="onBack()">Back</button>
-  </div>
+</div>
   
   <div class="wrapper-editor">
       <div class="block my-4">
@@ -22,15 +22,9 @@
               class="fas fa-plus-square ml-1"></i></a>
           </div>
     
-          <div class="modal fade modalEditClass" id="modalEdit" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <app-edit-product></app-edit-product>
-              </div>
-          </div>
-    
           <div class="text-center buttonEditWrapper">
               <button class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit"
-              >Edit<i class="fas fa-pencil-square-o ml-1"></i>
+              (click)="onEdit()" [disabled]='disableBtn' >Edit<i class="fas fa-pencil-square-o ml-1"></i>
               </button>
           </div>
     
@@ -45,12 +39,12 @@
                           </button>
                       </div>
                       <div class="modal-body mx-3">
-                          <p class="text-center h4">Are you sure to delete selected row?</p>
+                          <p class="text-center h4">Are you sure you want to delete selected row?</p>
       
                       </div>
                       <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-                          <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal">Yes</button>
-                          <button type="button" class="btn btn-primary btnNoClass" id="btnNo" data-dismiss="modal">No</button>
+                          <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal" (click)="onDeleteYes()">Yes</button>
+                          <button type="button" class="btn btn-primary btnNoClass" id="btnNo" data-dismiss="modal" >No</button>
                       </div>
                   </div>
               </div>
@@ -58,11 +52,11 @@
     
           <div class="text-center">
               <button class="btn btn-danger btn-sm btn-rounded buttonDelete" data-toggle="modal" disabled data-target="#modalDelete"
-              disabled>Delete<i class="fas fa-times ml-1"></i></button>
+              [disabled]='disableBtn'>Delete<i class="fas fa-times ml-1"></i></button>
           </div>
       </div>
     <div *ngIf = "products">
-      <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <table id="dtBasicExample" class="table table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th class="th-sm">S.No.</th>
@@ -75,7 +69,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor = "let product of products; let i = index">
+          <tr *ngFor = "let product of selectedProduct; let i = index" (click)="selectProduct(product)" [class.selected]="product.selected === true">
             <td>{{i+1}}</td>
             <td>{{product.productName}}</td>
             <td>{{product.category}}</td>
@@ -91,3 +85,76 @@
   </div>
   
 
+<div class="modal fade modalEditClass" id="modalEdit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form  novalidate (ngSubmit)="editProduct()" [formGroup]="editProductForm">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+              <h4 class="modal-title w-100 font-weight-bold text-primary ml-5">Edit Product</h4>
+              <button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body mx-3">
+              <div class="md-form mb-5">
+                  <div>
+                  <label for="productNameId">Product Name</label>
+                </div>
+                  <input type="text" id="productNameId" class="form-control validate"
+                    placeholder="Product Name"
+                    formControlName="productName" >
+              </div>
+      
+              <div class="md-form mb-5">
+                <select class="form-control"
+                  id="categoryId"
+                  formControlName="category">
+                  <option value=""
+                    disabled
+                    selected
+                    hidden>Select a Category</option>
+                  <option value="Vegetable">Vegetable</option>
+                  <option value="Fruit">Fruit</option>
+                </select>
+              </div>
+      
+      
+              <div class="md-form mb-5">
+                <input type="number" id="priceId" class="form-control validate"
+                  placeholder="Our Price"
+                  formControlName="pricePerKg" >
+              </div>
+      
+              <div class="md-form mb-5">
+                <input type="number" id="marketPriceId" class="form-control validate"
+                  placeholder="Market Price"
+                  formControlName="marketPrice" >
+              </div>
+      
+              <div class="md-form mb-5">
+                <input type="number" id="totalQtyId" class="form-control validate"
+                  placeholder="Stock"
+                  formControlName="totalQty" >
+              </div>
+      
+              <div class="md-form mb-5">
+                <a class="btn-floating peach-gradient mt-0 float-left">
+                  <i class="fas fa-paperclip" aria-hidden="true"></i>
+                  <input type="file">
+                </a>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload your file">
+                </div>
+              </div>
+      
+          </div>
+          <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
+              <button class="btn btn-outline-primary btn-block buttonAdd" >Edit Product
+                  <i class="fas fa-paper-plane-o ml-1"></i>
+              </button>
+          </div>
+        </div>
+      
+      </form>
+    </div>
+</div>

@@ -1,42 +1,59 @@
-<div class="modal-content">
-    <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold text-secondary ml-5">Edit form</h4>
-        <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+<form  novalidate (ngSubmit)="editProduct()" [formGroup]="editProductForm">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold text-primary ml-5">Edit Product</h4>
+          <button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+              <input type="text" id="productNameId" class="form-control validate"
+                placeholder="Product Name"
+                formControlName="productName" >
+          </div>
+  
+          <div class="md-form mb-5">
+            <input type="text" id="categoryId" class="form-control validate"
+              placeholder="Category"
+              formControlName="category" >
+          </div>
+  
+  
+          <div class="md-form mb-5">
+            <input type="number" id="priceId" class="form-control validate"
+              placeholder="Our Price"
+              formControlName="pricePerKg" >
+          </div>
+  
+          <div class="md-form mb-5">
+            <input type="number" id="marketPriceId" class="form-control validate"
+              placeholder="Market Price"
+              formControlName="marketPrice" >
+          </div>
+  
+          <div class="md-form mb-5">
+            <input type="number" id="totalQtyId" class="form-control validate"
+              placeholder="Stock"
+              formControlName="totalQty" >
+          </div>
+  
+          <div class="md-form mb-5">
+            <a class="btn-floating peach-gradient mt-0 float-left">
+              <i class="fas fa-paperclip" aria-hidden="true"></i>
+              <input type="file">
+            </a>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Upload your file">
+            </div>
+          </div>
+  
+      </div>
+      <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
+          <button class="btn btn-outline-primary btn-block buttonAdd" >Edit Product
+              <i class="fas fa-paper-plane-o ml-1"></i>
+          </button>
+      </div>
     </div>
-    <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-            <input type="text" id="formNameEdit" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="formNameEdit">Product Name</label>
-        </div>
-
-        <div class="md-form mb-5">
-            <input type="text" id="formPositionEdit" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="formPositionEdit">Category</label>
-        </div>
-
-        <div class="md-form mb-5">
-            <input type="text" id="formOfficeEdit" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="formOfficeEdit">Our Price</label>
-        </div>
-
-        <div class="md-form mb-5">
-            <input type="text" id="formAgeEdit" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="formAgeEdit">Market Price</label>
-        </div>
-
-
-
-        <div class="md-form mb-5">
-            <input type="text" id="formSalaryEdit" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="formSalaryEdit">Stock</label>
-        </div>
-    </div>
-    <div class="modal-footer d-flex justify-content-center editInsideWrapper">
-        <button class="btn btn-outline-secondary btn-block editInside" data-dismiss="modal">Edit
-            form
-            <i class="fas fa-paper-plane-o ml-1"></i>
-        </button>
-    </div>
-</div>
+  
+  </form>

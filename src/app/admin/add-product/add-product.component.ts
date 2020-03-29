@@ -42,17 +42,11 @@ export class AddProductComponent implements OnInit {
       if(res=== true){
         //window.alert("Product Added");
         this.addProductForm.reset();
+        console.log(this.product);
         window.location.reload();
       }else{
         console.log("Unable to add data");
       }
     });
-
-    this.productService.getAllProducts().subscribe(
-      (res: Products[]) =>{
-        console.log(res);
-      }
-    );
-
   }
 }

@@ -22,17 +22,16 @@
         </div>
 
         <div class="md-form mb-5">
-          <input type="text" id="categoryId" class="form-control validate"
-            placeholder="Category"
-            formControlName="category" 
-            required
-            [ngClass]="{'is-invalid': (addProductForm.get('category').touched || addProductForm.get('category').dirty) && !addProductForm.get('category').valid }" 
-          >
-          <span class="invalid-feedback">
-            <span *ngIf="addProductForm.get('category').errors?.required">
-              Please enter category.
-            </span>
-          </span>
+          <select class="form-control"
+            id="categoryId"
+            formControlName="category">
+            <option value=""
+              disabled
+              selected
+              hidden>Select a Category</option>
+            <option value="Vegetable">Vegetable</option>
+            <option value="Fruit">Fruit</option>
+          </select>
         </div>
 
 
