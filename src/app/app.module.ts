@@ -18,6 +18,7 @@ import { AdminViewComponent } from './admin/admin-view/admin-view.component';
 import { MainPageComponent } from './admin/main-page/main-page.component';
 import { EditProductComponent} from './admin/edit-product/edit-product.component';
 import { DeliveredOrderComponent } from './admin/delivered-order/delivered-order.component';
+import { CancelledOrderComponent } from './admin/cancelled-order/cancelled-order.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DeliveredOrderComponent } from './admin/delivered-order/delivered-order
     MainPageComponent,
     AdminViewComponent,
     EditProductComponent,
-    DeliveredOrderComponent
+    DeliveredOrderComponent,
+    CancelledOrderComponent
 
   ],
   imports: [
