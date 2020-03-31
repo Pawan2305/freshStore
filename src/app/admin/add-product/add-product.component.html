@@ -7,7 +7,7 @@
         </button>
     </div>
     <div class="modal-body mx-3">
-        <div class="md-form mb-5">
+        <!--div class="md-form mb-3">
             <input type="text" id="productNameId" class="form-control validate"
               placeholder="Product Name"
               formControlName="productName" 
@@ -19,9 +19,25 @@
                 Please enter the Product Name.
               </span>
             </span>
+        </div-->
+
+        <div class="md-form md-outline input-with-pre-icon mb-3">
+          <i class="fas fa-pen input-prefix"></i>
+          <input type="text" id="productNameId" class="form-control"
+          formControlName="productName" 
+          required
+          [ngClass]="{'is-invalid': (addProductForm.get('productName').touched || addProductForm.get('productName').dirty) && !addProductForm.get('productName').valid }" 
+        >
+        <label for="productNameId">Product Name</label>
+        <span class="invalid-feedback">
+          <span *ngIf="addProductForm.get('productName').errors?.required">
+            Please enter the Product Name.
+          </span>
+        </span>
+          
         </div>
 
-        <div class="md-form mb-5">
+        <div class="md-form mb-3">
           <select class="form-control"
             id="categoryId"
             formControlName="category">
@@ -35,7 +51,7 @@
         </div>
 
 
-        <div class="md-form mb-5">
+        <div class="md-form mb-3">
           <input type="number" id="priceId" class="form-control validate"
             placeholder="Our Price"
             formControlName="pricePerKg" 
@@ -49,7 +65,7 @@
           </span>
         </div>
 
-        <div class="md-form mb-5">
+        <div class="md-form mb-3">
           <input type="number" id="marketPriceId" class="form-control validate"
             placeholder="Market Price"
             formControlName="marketPrice" 
@@ -63,7 +79,7 @@
           </span>
         </div>
 
-        <div class="md-form mb-5">
+        <div class="md-form mb-3">
           <input type="number" id="totalQtyId" class="form-control validate"
             placeholder="Stock"
             formControlName="totalQty" 
@@ -77,7 +93,7 @@
           </span>
         </div>
 
-        <div class="md-form mb-5">
+        <div class="md-form mb-3">
           <a class="btn-floating peach-gradient mt-0 float-left">
             <i class="fas fa-paperclip" aria-hidden="true"></i>
             <input type="file">
