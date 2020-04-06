@@ -37,7 +37,8 @@
           
         </div>
 
-        <div class="md-form mb-3">
+        <div class="md-form md-outline input-with-pre-icon mb-3">
+          <i class="fas fa-pen input-prefix"></i>
           <select class="form-control"
             id="categoryId"
             formControlName="category">
@@ -51,13 +52,14 @@
         </div>
 
 
-        <div class="md-form mb-3">
-          <input type="number" id="priceId" class="form-control validate"
-            placeholder="Our Price"
+        <div class="md-form md-outline input-with-pre-icon mb-3">
+          <i class="fas fa-pen input-prefix"></i>
+          <input type="number" id="priceId" class="form-control"
             formControlName="pricePerKg" 
             required
             [ngClass]="{'is-invalid': (addProductForm.get('pricePerKg').touched || addProductForm.get('pricePerKg').dirty) && !addProductForm.get('pricePerKg').valid }" 
           >
+          <label for="priceId">Our Price</label>
           <span class="invalid-feedback">
             <span *ngIf="addProductForm.get('pricePerKg').errors?.required">
               Please enter our price.
@@ -65,13 +67,14 @@
           </span>
         </div>
 
-        <div class="md-form mb-3">
-          <input type="number" id="marketPriceId" class="form-control validate"
-            placeholder="Market Price"
+        <div class="md-form md-outline input-with-pre-icon mb-3">
+          <i class="fas fa-pen input-prefix"></i>
+          <input type="number" id="marketPriceId" class="form-control"
             formControlName="marketPrice" 
             required
             [ngClass]="{'is-invalid': (addProductForm.get('marketPrice').touched || addProductForm.get('marketPrice').dirty) && !addProductForm.get('marketPrice').valid }" 
           >
+          <label for="marketPriceId">Market Price</label>
           <span class="invalid-feedback">
             <span *ngIf="addProductForm.get('marketPrice').errors?.required">
               Please enter Market Price.
@@ -79,13 +82,14 @@
           </span>
         </div>
 
-        <div class="md-form mb-3">
-          <input type="number" id="totalQtyId" class="form-control validate"
-            placeholder="Stock"
+        <div class="md-form md-outline input-with-pre-icon mb-3">
+          <i class="fas fa-pen input-prefix"></i>
+          <input type="number" id="totalQtyId" class="form-control"
             formControlName="totalQty" 
             required
             [ngClass]="{'is-invalid': (addProductForm.get('totalQty').touched || addProductForm.get('totalQty').dirty) && !addProductForm.get('totalQty').valid }" 
           >
+          <label for="totalQtyId">Total Quantity</label>
           <span class="invalid-feedback">
             <span *ngIf="addProductForm.get('totalQty').errors?.required">
               Please enter Total Qty.
@@ -94,12 +98,14 @@
         </div>
 
         <div class="md-form mb-3">
-          <a class="btn-floating peach-gradient mt-0 float-left">
-            <i class="fas fa-paperclip" aria-hidden="true"></i>
-            <input type="file">
-          </a>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" placeholder="Upload your file">
+          <input 
+          formControlName="image"
+          id="image" 
+          type="file" 
+          class="form-control"
+          (change)="onFileChange($event)">
+          <div *ngIf="addProductForm.get('image').touched && addProductForm.get('image').invalid" class="alert alert-danger">
+             <div *ngIf="addProductForm.get('image').errors.required">image is required.</div>
           </div>
         </div>
 

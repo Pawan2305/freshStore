@@ -9,10 +9,10 @@
           </div>
       </div>
 
-      <form class="form-inline mr-auto">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search Product" aria-label="Search">
+      <div>
+        <input type="text" [(ngModel)]="listFilter" />
         <i class="fas fa-search input-prefix" aria-hidden="true"></i>  
-      </form>
+      </div>
     
       <div class="row d-flex justify-content-center modalWrapper">
           <div class="modal fade addNewInputs" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAdd"
@@ -69,19 +69,27 @@
             <th class="th-sm">Category</th>
             <th class="th-sm">Our price</th>
             <th class="th-sm">Market Price</th>
-            <th class="th-sm">Total Stock</th>
-            <th class="th-sm">Remaining Stock</th>
+            <th class="th-sm">Total Stock (In KG)</th>
+            <th class="th-sm">Remaining Stock (In KG)</th>
+            <th class="th-sm">Image</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor = "let product of selectedProduct; let i = index" (click)="selectProduct(product)" [class.selected]="product.selected === true">
+          <tr *ngFor = "let product of filteredProducts; let i = index" (click)="selectProduct(product)" [class.selected]="product.selected === true">
             <td>{{i+1}}</td>
             <td>{{product.productName}}</td>
             <td>{{product.category}}</td>
-            <td>{{product.pricePerKg}}</td>
-            <td>{{product.marketPrice}}</td>
+            <td>{{product.pricePerKg | currency:'INR':'symbol':'1.0-2'}}</td>
+            <td>{{product.marketPrice | currency:'INR':'symbol':'1.0-2' }}</td>
             <td>{{product.totalQty}}</td>
             <td>{{product.qtyRemain}}</td>
+            <td>
+              <img *ngIf="product.image"
+                   [src]="product.image"
+                   [title]="product.productName"
+                   [style.width.px]="imageWidth"
+                   [style.margin.px]="imageMargin">
+            </td>
           </tr>
         </tbody>
        
@@ -101,16 +109,15 @@
               </button>
           </div>
           <div class="modal-body mx-3">
-              <div class="md-form mb-5">
-                  <div>
-                  <label for="productNameId">Product Name</label>
-                </div>
+            <div class="md-form md-outline input-with-pre-icon mb-3">
+              <i class="fas fa-pen input-prefix"></i>
                   <input type="text" id="productNameId" class="form-control validate"
-                    placeholder="Product Name"
                     formControlName="productName" >
+                    <label for="productNameId">Product Name</label>
               </div>
       
-              <div class="md-form mb-5">
+               <div class="md-form md-outline input-with-pre-icon mb-3">
+                <i class="fas fa-pen input-prefix"></i>
                 <select class="form-control"
                   id="categoryId"
                   formControlName="category">
@@ -124,32 +131,41 @@
               </div>
       
       
-              <div class="md-form mb-5">
+              <div class="md-form md-outline input-with-pre-icon mb-3">
+                <i class="fas fa-pen input-prefix"></i>
                 <input type="number" id="priceId" class="form-control validate"
-                  placeholder="Our Price"
                   formControlName="pricePerKg" >
+                  <label for="priceId">Our Price</label>
               </div>
       
-              <div class="md-form mb-5">
+              <div class="md-form md-outline input-with-pre-icon mb-3">
+                <i class="fas fa-pen input-prefix"></i>
                 <input type="number" id="marketPriceId" class="form-control validate"
-                  placeholder="Market Price"
                   formControlName="marketPrice" >
+                  <label for="marketPriceId">Market Price</label>
               </div>
       
-              <div class="md-form mb-5">
+              <div class="md-form md-outline input-with-pre-icon mb-3">
+                <i class="fas fa-pen input-prefix"></i>
                 <input type="number" id="totalQtyId" class="form-control validate"
-                  placeholder="Stock"
                   formControlName="totalQty" >
+                  <label for="totalQtyId">Total Quantity</label>
+              </div>
+
+              <div>
+                <img [src]="imageToShow"
+                  alt="Place image title"
+                  [style.width.px]="imageWidth"
+                  [style.margin.px]="imageMargin">
               </div>
       
-              <div class="md-form mb-5">
-                <a class="btn-floating peach-gradient mt-0 float-left">
-                  <i class="fas fa-paperclip" aria-hidden="true"></i>
-                  <input type="file">
-                </a>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text" placeholder="Upload your file">
-                </div>
+              <div class="md-form mb-3">
+                <input 
+                formControlName="image"
+                id="image" 
+                type="file" 
+                class="form-control"
+                (change)="onFileChange($event)">
               </div>
       
           </div>
@@ -163,3 +179,11 @@
       </form>
     </div>
 </div>
+
+
+<button type="button" (click)="getImageFromService()">Get Image</button>
+
+<img [src]="imageToShow"
+     alt="Place image title"
+     [style.width.px]="imageWidth"
+     [style.margin.px]="imageMargin">

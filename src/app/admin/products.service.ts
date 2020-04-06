@@ -9,7 +9,7 @@ import { Products, SelectedProducts } from './product';
 })
 export class ProductsService {
 
-  baseUrl = 'http://localhost/api';
+  baseUrl = "http://localhost/api";
   product: Products[];
   selectedProduct: SelectedProducts = new SelectedProducts();
                 
@@ -33,7 +33,7 @@ export class ProductsService {
   }
 
   addProduct(productData: Products): Observable<boolean> {
-    return this.http.post(`${this.baseUrl}/addProduct.php`, { data: productData })
+    return this.http.post(`${this.baseUrl}/addProduct.php`, { data: productData})
       .pipe(map((res) => {
         console.log(res);
         console.log("Data Inserted");
@@ -64,10 +64,26 @@ export class ProductsService {
       catchError(this.handleError));
   }
 
+  uploadImage(formData): Observable<string>{
+
+    console.log(formData);
+    return this.http.post(`${this.baseUrl}/uploadImage.php`, formData)
+    .pipe(map(res => {
+      console.log(res.toString());
+      return res.toString();
+    }),
+    catchError(this.handleError));
+  }
+
+  getImage(imageUrl: string): Observable<Blob> {
+    const url = this.baseUrl+'/'+imageUrl;
+    console.log(url);
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.log(error);
    
-    // return an observable with a user friendly message
     return throwError('Error! something went wrong.');
   }
 }

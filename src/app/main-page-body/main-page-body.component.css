@@ -1,3 +1,9 @@
+.card_img{
+    width: 250px;
+    height: 200px;
+}
+
+
 .number-input input[type="number"] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;

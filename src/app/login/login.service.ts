@@ -10,8 +10,17 @@ export class LoginService {
 
   baseUrl = 'http://localhost/api';
   login: Login[];
+  private isLogin: boolean;
                 
   constructor(private http: HttpClient) { }
+
+  getIsLogin():boolean{
+    return this.isLogin;
+  }
+
+  setIsLogin(isLogin):void{
+    this.isLogin = isLogin;
+  }
                 
   getAll(): Observable<Login[]> {
     return this.http.get(`${this.baseUrl}/list.php`).pipe(

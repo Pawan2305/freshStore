@@ -13,6 +13,8 @@ export class AddProductComponent implements OnInit {
 
   addProductForm:FormGroup;
   product: Products = new Products();
+  fileToUpload: File = null;
+  imageUrl: String;
 
   constructor(private router: Router,
         private formBuilder: FormBuilder,
@@ -24,8 +26,17 @@ export class AddProductComponent implements OnInit {
       category: '',
       pricePerKg: null,
       marketPrice: null,
-      totalQty : null
+      totalQty : null,
+      image: null
     });
+  }
+
+  onFileChange(event) {
+  
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.fileToUpload = file;
+    }
   }
 
   addProduct(){
@@ -36,17 +47,28 @@ export class AddProductComponent implements OnInit {
     this.product.marketPrice = this.addProductForm.get('marketPrice').value;
     this.product.totalQty = this.addProductForm.get('totalQty').value;
     this.product.qtyRemain = this.addProductForm.get('totalQty').value;
-    this.product.image = '/assets/image/apple.jpg';
-    console.log(this.product);
-    this.productService.addProduct(this.product).subscribe((res)=>{
-      if(res=== true){
-        //window.alert("Product Added");
-        this.addProductForm.reset();
-        console.log(this.product);
-        window.location.reload();
-      }else{
-        console.log("Unable to add data");
-      }
+    const formData:FormData = new FormData();
+    formData.append('file', this.fileToUpload);
+    this.productService.uploadImage(formData)
+     .subscribe((res) =>{
+        if(res){
+         alert("File Uploaded");
+          this.imageUrl= res;
+          this.product.image = res;
+          console.log(this.product);
+          this.productService.addProduct(this.product).subscribe((res)=>{
+            if(res=== true){
+              //window.alert("Product Added");
+              this.addProductForm.reset();
+              console.log(this.product);
+              window.location.reload();
+            }else{
+              console.log("Unable to add data");
+            }
+          });
+        }else{
+          alert("Image Upload failed");
+        }
     });
   }
 }
