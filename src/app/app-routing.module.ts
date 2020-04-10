@@ -9,6 +9,10 @@ import { DeliveredOrderComponent } from './admin/delivered-order/delivered-order
 import { CancelledOrderComponent } from './admin/cancelled-order/cancelled-order.component';
 import { SalesSummaryComponent } from './admin/sales-summary/sales-summary.component';
 import { CartDetailsComponent } from './cart-details/cart-details.component';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { PaymentComponent } from './payment/payment.component';
+import { BillComponent } from './bill/bill.component';
+import { TrackOrderComponent } from './track-order/track-order.component';
 
 
 const routes: Routes = [
@@ -19,6 +23,10 @@ const routes: Routes = [
   { path: 'admin/cancelled-orders', component: CancelledOrderComponent},
   { path: 'admin/sales-summary', component: SalesSummaryComponent},
   { path: 'cart-details', component: CartDetailsComponent},
+  { path: 'check-out', component:  CheckOutComponent},
+  { path: 'payment', component:  PaymentComponent},
+  { path: 'bill', component:  BillComponent},
+  { path: 'track-order', component:  TrackOrderComponent},
   { path: '', redirectTo: 'main-page', pathMatch:"full"}
 ];
 

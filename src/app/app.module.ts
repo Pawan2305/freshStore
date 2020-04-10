@@ -20,6 +20,10 @@ import { DeliveredOrderComponent } from './admin/delivered-order/delivered-order
 import { CancelledOrderComponent } from './admin/cancelled-order/cancelled-order.component';
 import { SalesSummaryComponent } from './admin/sales-summary/sales-summary.component';
 import { CartDetailsComponent } from './cart-details/cart-details.component';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { PaymentComponent } from './payment/payment.component';
+import { BillComponent } from './bill/bill.component';
+import { TrackOrderComponent } from './track-order/track-order.component';
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import { CartDetailsComponent } from './cart-details/cart-details.component';
     DeliveredOrderComponent,
     CancelledOrderComponent,
     SalesSummaryComponent,
-    CartDetailsComponent
+    CartDetailsComponent,
+    CheckOutComponent,
+    PaymentComponent,
+    BillComponent,
+    TrackOrderComponent
 
   ],
   imports: [

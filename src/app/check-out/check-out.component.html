@@ -1,0 +1,151 @@
+
+<div class="container">
+  <h5 class="card-header info-color white-text text-center py-4">
+    <strong>Delivery Address</strong>
+  </h5>
+
+  
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-4-5">
+        <span class="text-muted"><strong>Your cart</strong></span>
+        <span class="badge badge-danger badge-pill">3</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Product name</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$12</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Second product</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$8</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Third item</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bg-light">
+          <div class="text-success">
+            <h6 class="my-0">Delivery Charges</h6>
+          </div>
+          <span class="text-success">+$10</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bg-light">
+          <div class="text-success">
+            <h6 class="my-0">Discount</h6>
+          </div>
+          <span class="text-success">-$5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between info-color">
+          <span>Total (USD)</span>
+          <strong>$20</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-8 order-md-1">
+      <form class="needs-validation" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="md-form md-outline my-2">
+              <input type="text" id="firstName" class="form-control" required>
+              <label for="firstName">First name</label>
+            </div>
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="md-form md-outline my-2">
+              <input type="text" id="lastName" class="form-control" required>
+              <label for="lastName">Last name</label>
+            </div>
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="md-form md-outline my-2">
+            <input type="number" id="phone no" class="form-control" required>
+            <label for="username" >Mobile no.</label>
+          </div>
+          <div class="invalid-feedback">
+            Your Mobile No. is required.
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 mb-3">
+            <div class="md-form md-outline my-2">
+              <input type="email" id="email" class="form-control">
+              <label for="email">Email</label>
+            </div>
+            <div class="invalid-feedback">
+              Please enter a valid email address for shipping updates.
+            </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <div class="md-form md-outline my-2">
+              <input type="text" id="address" class="form-control" required>
+              <label for="address">Address</label>
+            </div>
+            <div class="invalid-feedback">
+              Please enter your shipping address.
+            </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <div class="md-form md-outline my-2">
+              <input type="text" id="address2" class="form-control" required>
+              <label for="address2">Address 2 (Optional)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <select class="custom-select d-block w-100 mt-2" id="country" required>
+              <option value="">Delivery Type</option>
+              <option>Standard Delivery</option>
+              <option>Fast Delivery</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <select class="custom-select d-block w-100 mt-2" id="state" required>
+              <option value="">State</option>
+              <option>California</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="md-form md-outline mt-2 mb-0">
+              <input type="text" id="zip" class="form-control mb-0" required>
+              <label for="zip">Zip</label>
+            </div>
+            <div class="invalid-feedback">
+              Zip code required.
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn btn-info btn-lg btn-block" [routerLink]="['/payment']" type="submit">Continue to checkout</button>
+      </form>
+    </div>
+  </div>
+</div>
