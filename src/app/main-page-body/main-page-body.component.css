@@ -4,6 +4,49 @@
 }
 
 
+.card{
+
+    transition: 0.5s ease;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.card:hover {
+    transform: scale(1.09);
+    -webkit-box-shadow: 0 20px 35px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 20px 35px 0 rgba(0, 0, 0, .05);
+}
+
+.card:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background-color: #064f8b;
+    transition: 0.5s;
+    width: 100%;
+  }
+
+
+  .period{
+    font-size: 0.7rem;
+    color: black;
+  }
+
+
+.amount{
+    font-size: 0.9rem;
+}
+
+  
+    
+
+
+
+
+
 .number-input input[type="number"] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;

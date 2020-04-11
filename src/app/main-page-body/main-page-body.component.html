@@ -90,17 +90,23 @@
               </strong>
             </h5>
 
+            <div class="style-4">
+              <del>
+                <span class="amount">€3500</span>
+              </del>
+            </div>  
+
             <h5 class="font-weight-bold blue-text mb-0">
-              <strong>{{product.pricePerKg | currency:'INR':'symbol':'1.0-2' }}</strong>
+              <strong>{{product.pricePerKg | currency:'INR':'symbol':'1.0-2' }}<span class="period">/kg</span></strong>
             </h5>
 
           </div>
 
-          <div class="def-number-input number-input safari_only">
+          <!--div class="def-number-input number-input safari_only">
             <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
             <input class="quantity" min="0" name="quantity" value="1" type="number">
             <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-          </div>
+          </div-->
 
           <button type="button" class="btn btn-light-blue btn-block btn-lg">Add To Cart</button>
           <!-- Card content -->
