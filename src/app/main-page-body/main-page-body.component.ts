@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../admin/products.service';
 import { Products } from '../admin/product';
+import { LoginService } from '../login.service';
+import { ProductsCartService } from '../products-cart.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-main-page-body',
@@ -11,10 +14,25 @@ export class MainPageBodyComponent implements OnInit {
 
   count = [0,1,2];
   products: Products[];
+  quantity = new FormControl();
 
-  constructor(private productService: ProductsService) { }
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
+  filteredProducts: Products[] = [];
+
+  constructor(private productService: ProductsService,
+    public loginService: LoginService,
+    private productCartService: ProductsCartService) { }
 
   ngOnInit(): void {
+
+    
     this.productService.getAllProducts().subscribe(
       (res: Products[]) =>{
         this.products = res;
@@ -32,11 +50,26 @@ export class MainPageBodyComponent implements OnInit {
             console.log(error);
           });
         });
-
+        this.filteredProducts = this.products
         console.log(this.products);
       }
     );
 
   }
 
+  performFilter(filterBy: string): Products[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products.filter((product: Products) =>
+      product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+
+  addToCart(product) {
+    this.productCartService.addToCart(product);
+    window.alert('Your product has been added to the cart!');
+  }
+
+}
+
+export interface CartProduct extends Products {
+  quantity: number;
 }

@@ -1,4 +1,6 @@
-
+<div *ngIf="loginService.category">
+  {{loginService.category}}
+</div>
 <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -44,10 +46,9 @@
   <!-- Collapsible content -->
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <form class="form-inline mr-auto">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
-    </form>
+    <div class="form-inline mr-auto">
+      <input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="listFilter">
+    </div>
 
   </div>
   <!-- Collapsible content -->
@@ -57,13 +58,14 @@
 
 </nav>
 <!--/.Navbar-->
+
 <div class="container mt-5">
   <!--Section: Content-->
   <section class="dark-grey-text text-center">
     <!-- Grid row -->
     <div class="row">
       <!-- Grid column -->
-      <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch" *ngFor="let product of products;">
+      <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch" *ngFor="let product of filteredProducts;">
         <!-- Card -->
         <div class="card align-items-center">
           <!-- Card image -->
@@ -104,11 +106,11 @@
 
           <!--div class="def-number-input number-input safari_only">
             <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-            <input class="quantity" min="0" name="quantity" value="1" type="number">
+            <input class="quantity" min="1" name="quantity" value="1" type="number" >
             <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
           </div-->
 
-          <button type="button" class="btn btn-light-blue btn-block btn-lg">Add To Cart</button>
+          <button type="button" class="btn btn-light-blue btn-block btn-lg" (click)="addToCart(product)">Add To Cart</button>
           <!-- Card content -->
         </div>
         <!-- Card -->

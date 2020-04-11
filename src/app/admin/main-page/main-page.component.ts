@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ProductsService } from '../products.service';
 import { Products, SelectedProducts } from '../product';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { LoginService } from 'src/app/login/login.service';
+import { LoginService } from 'src/app/login.service';
 
 @Component({
   selector: 'app-main-page',
@@ -42,7 +42,7 @@ export class MainPageComponent implements OnInit {
       private formBuilder: FormBuilder,
       private loginService: LoginService ) { }
 
-      performFilter(filterBy: string): SelectedProducts[] {
+  performFilter(filterBy: string): SelectedProducts[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.selectedProduct.filter((product: SelectedProducts) =>
       product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
@@ -107,6 +107,7 @@ export class MainPageComponent implements OnInit {
    }
 
   onBack(){
+    this.loginService.isLogin = true;
     this.router.navigate(['main-page']);
   }
 

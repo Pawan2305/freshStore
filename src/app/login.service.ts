@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Login } from './login';
+import { Login } from './login/login';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -10,16 +10,23 @@ export class LoginService {
 
   baseUrl = 'http://localhost/api';
   login: Login[];
-  private isLogin: boolean;
+  username: string;
+  isUserLogin: boolean = false;
+  public isLogin: boolean = true;
+  public useremail: string;
+  public category: string = "";
                 
   constructor(private http: HttpClient) { }
 
-  getIsLogin():boolean{
-    return this.isLogin;
+  getIsLogin():string{
+    return this.useremail;
   }
 
-  setIsLogin(isLogin):void{
+  setIsLogin(isLogin, username):void{
     this.isLogin = isLogin;
+    this.useremail = username;
+    this.isUserLogin = true;
+    console.log(this.useremail);
   }
                 
   getAll(): Observable<Login[]> {
@@ -27,6 +34,16 @@ export class LoginService {
       map((res) => {
         this.login = res['data'];
         return this.login;
+    }),
+    catchError(this.handleError));
+  }
+
+  getUserName(email: Login):Observable<string>{
+    return this.http.post(`${this.baseUrl}/customer.php`, { data: email}).pipe(
+      map((res) => {
+        this.username = res['customerName'];
+        console.log(this.username);
+        return this.username;
     }),
     catchError(this.handleError));
   }

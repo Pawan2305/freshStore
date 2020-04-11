@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from './login.service';
+import { LoginService } from '../login.service';
 import { Login } from './login';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -39,14 +39,15 @@ export class LoginComponent implements OnInit {
             if(element.loginId === "admin"){
               console.log("admin");
               this.loginForm.reset();
-              this.loginService.setIsLogin(true);
+              this.loginService.setIsLogin(false, element.loginId);
               this.router.navigate(['admin']);
             }else{
               console.log("Login Successfull");
               this.loginForm.reset();
-              this.loginService.setIsLogin(false);
+              this.loginService.setIsLogin(true, element.loginId);
+              this.loginService.getUserName(element).subscribe((res) => {});
               window.alert("Welcome "+element.loginId);
-              this.router.navigate(['main-page']);
+             // this.router.navigate(['/home', 'store']);
             }
           }else{
            this.loginError = true;

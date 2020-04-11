@@ -24,7 +24,8 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BillComponent } from './bill/bill.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
-
+import { RouterModule } from '@angular/router';
+import { LiveProductComponent } from './admin/live-product/live-product.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TrackOrderComponent } from './track-order/track-order.component';
     CheckOutComponent,
     PaymentComponent,
     BillComponent,
+    LiveProductComponent,
     TrackOrderComponent
 
   ],
@@ -53,7 +55,10 @@ import { TrackOrderComponent } from './track-order/track-order.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forChild([
+      {path: 'home/:category', component: MainPageBodyComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
