@@ -15,6 +15,9 @@ export class MainPageBodyComponent implements OnInit {
   count = [0,1,2];
   products: Products[];
   quantity = new FormControl();
+  isShow = false;
+  show: string = '';
+  message: string;
 
   _listFilter = '';
   get listFilter(): string {
@@ -65,7 +68,21 @@ export class MainPageBodyComponent implements OnInit {
 
   addToCart(product) {
     this.productCartService.addToCart(product);
-    window.alert('Your product has been added to the cart!');
+    //window.alert('Your product has been added to the cart!');
+    this.message = product.productName+" added to cart.";
+    this.show = 'show';
+    setTimeout(()=>{    
+      this.show = ' ';
+    }, 3000);
+  }
+
+  myFunction(){
+    this.isShow = true;
+    this.show = "show";
+    setTimeout(function(){ 
+      this.isShow = false;
+      this.show = " ";
+    }, 3000);
   }
 
 }

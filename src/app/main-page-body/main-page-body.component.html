@@ -94,7 +94,7 @@
 
             <div class="style-4">
               <del>
-                <span class="amount">€3500</span>
+                <span class="amount">{{product.marketPrice| currency:'INR':'symbol':'1.0-2' }}</span>
               </del>
             </div>  
 
@@ -125,5 +125,10 @@
 
 
 </div>
+
+<button (click)="myFunction()">Show Snackbar</button>
+
+<!-- The actual snackbar -->
+<div id="snackbar" [class]="show">{{message}}</div>
 
 <app-footer></app-footer>

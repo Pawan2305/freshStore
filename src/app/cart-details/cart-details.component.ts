@@ -17,4 +17,6 @@ export class CartDetailsComponent implements OnInit {
     console.log(this.products);
   }
 
+  
+
 }

@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Products } from './admin/product';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsCartService {
 
-  products = [];
-
+  products:Products[] = [];
+  exists: boolean = false;
   constructor() { }
 
   addToCart(product) {
-    this.products.push(product);
+    this.products.forEach(element=>{
+      if(element.productId === product.productId){
+        this.exists = true;
+      }
+    });
+    if(!this.exists){
+      this.products.push(product);
+    }
+    
   }
 
   getItems() {
