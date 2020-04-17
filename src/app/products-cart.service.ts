@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Products } from './admin/product';
+import { Products, CartProducts } from './admin/product';
+import { element } from 'protractor';
 
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Products } from './admin/product';
 })
 export class ProductsCartService {
 
-  products:Products[] = [];
+  products:CartProducts[] = [];
   exists: boolean = false;
   constructor() { }
 
@@ -18,9 +19,25 @@ export class ProductsCartService {
       }
     });
     if(!this.exists){
-      this.products.push(product);
-    }
-    
+      const item:CartProducts={
+        productId: product.productId,
+        productName: product.productName,
+        pricePerKg: +product.pricePerKg,
+        quantity: 1,
+        totalPrice: +product.pricePerKg,
+        image: product.image
+      };
+      this.products.push(item);
+      console.log(item);
+    } 
+  }
+
+  deleteItems(product: CartProducts):CartProducts[]{
+    console.log(product);
+    const products =  this.products.filter(element => element !==product);
+    console.log(products);
+    this.products = products;
+    return this.products;
   }
 
   getItems() {

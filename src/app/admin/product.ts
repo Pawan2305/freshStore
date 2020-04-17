@@ -19,3 +19,13 @@ export class SelectedProducts extends Products{
   }
 }
 
+export class CartProducts{
+
+  productId: number;
+  productName: string;
+  pricePerKg: number;
+  quantity: number;
+  totalPrice: number;
+  image: string;
+}
+
