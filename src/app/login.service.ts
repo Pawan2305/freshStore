@@ -11,6 +11,7 @@ export class LoginService {
   baseUrl = 'http://localhost/api';
   login: Login[];
   username: string;
+  customerId;
   isUserLogin: boolean = false;
   public isLogin: boolean = true;
   public useremail: string;
@@ -42,6 +43,7 @@ export class LoginService {
     return this.http.post(`${this.baseUrl}/customer.php`, { data: email}).pipe(
       map((res) => {
         this.username = res['customerName'];
+        this.customerId = res['email'];
         console.log(this.username);
         return this.username;
     }),

@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Products, SelectedProducts } from './product';
+import { CartItems } from '../products-cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,24 @@ export class ProductsService {
       map((res) => {
         this.product = res['data'];
         return this.product;
+    }),
+    catchError(this.handleError));
+  }
+
+  getProductById(item): Observable<Products>{
+    return this.http.post(`${this.baseUrl}/getProductById.php`, {data: item}).pipe(
+      map((res) => {
+        const product: Products = {
+          productId: res['productId'],
+          productName: res['productName'],
+          category: res['category'],
+          pricePerKg: res['pricePerKg'],
+          marketPrice: res['marketPrice'],
+          totalQty: res['totalQty'],
+          qtyRemain: res['qtyRemain'],
+          image: res['image']
+      };
+        return product;
     }),
     catchError(this.handleError));
   }

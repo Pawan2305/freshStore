@@ -16,10 +16,11 @@ export class CartDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.productCartService.getItems();
-    this.products.forEach(element =>{
-      this.subTotal = this.subTotal + element.totalPrice;
-    });
+    console.log(this.products);
     console.log(this.subTotal);
+    for(let i in this.products){
+      console.log(i);
+    }
   }
 
   onDelete(product: CartProducts){

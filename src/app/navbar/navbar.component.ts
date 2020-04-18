@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductsCartService } from '../products-cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,8 @@ export class NavbarComponent implements OnInit {
   isLogin: boolean;
 
   constructor(public loginService: LoginService,
-    private router: Router) { }
+    private router: Router,
+    private productCartService: ProductsCartService) { }
 
   ngOnInit(): void {
     const log =this.loginService.getIsLogin();
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit {
   onLogout(){
     this.loginService.isUserLogin = false;
     this.loginService.username = null;
+    this.productCartService.products =[];
     this.router.navigate(['/home', 'store']);
   }
 
