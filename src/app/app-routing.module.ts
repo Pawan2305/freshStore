@@ -13,6 +13,7 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BillComponent } from './bill/bill.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'payment', component:  PaymentComponent},
   { path: 'bill', component:  BillComponent},
   { path: 'track-order', component:  TrackOrderComponent},
+  { path: 'order-history', component:  OrderHistoryComponent},
   { path: '', redirectTo: 'main-page', pathMatch:"full"}
 ];
 

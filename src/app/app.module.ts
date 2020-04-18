@@ -26,6 +26,7 @@ import { BillComponent } from './bill/bill.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { RouterModule } from '@angular/router';
 import { LiveProductComponent } from './admin/live-product/live-product.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { LiveProductComponent } from './admin/live-product/live-product.componen
     PaymentComponent,
     BillComponent,
     LiveProductComponent,
-    TrackOrderComponent
+    TrackOrderComponent,
+    OrderHistoryComponent
 
   ],
   imports: [
