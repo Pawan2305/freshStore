@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Products, CartProducts } from './admin/product';
 import { element } from 'protractor';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { LoginService } from './login.service';
 import { Login } from './login/login';
@@ -24,6 +24,7 @@ export class ProductsCartService {
     private productService: ProductsService) { }
 
   addToCart(product) {
+    console.log("In Add Service");
     this.products.forEach(element=>{
       if(element.productId === product.productId){
         this.exists = true;
@@ -31,11 +32,14 @@ export class ProductsCartService {
     });
     if(!this.exists){
       const item:CartProducts={
+        cartId: 1,
         productId: product.productId,
         productName: product.productName,
         pricePerKg: +product.pricePerKg,
         quantity: 1,
         totalPrice: +product.pricePerKg,
+        discount: ((+product.marketPrice)-(+product.pricePerKg)),
+        totalDiscount: ((+product.marketPrice)-(+product.pricePerKg)),
         image: product.image
       };
       this.products.push(item);
@@ -56,10 +60,27 @@ export class ProductsCartService {
   }
 
   deleteItems(product: CartProducts):CartProducts[]{
-    console.log(product);
-    const products =  this.products.filter(element => element !==product);
-    console.log(products);
-    this.products = products;
+    if(this.loginService.isUserLogin){
+      this.deleteCartItem(product.cartId).subscribe( (res: boolean) =>{
+        if(res){
+          console.log(product);
+          const index = this.products.indexOf(product);
+          console.log(index);
+          if (index > -1) {
+            this.products.splice(index, 1);
+          }
+          console.log("Product Deleted");
+        }
+        else{
+          console.log("Product Not deleted");
+        }
+      });
+    }else{
+      console.log(product);
+      const products =  this.products.filter(element => element !==product);
+      this.products = products;
+    }
+    console.log(this.products);
     return this.products;
   }
 
@@ -71,19 +92,24 @@ export class ProductsCartService {
         pswd: ""
       }
       let itemQuantiy;
+      
       this.getItemFromDatabase(email).subscribe(res => {
         res.forEach(item =>{
           const cartItem = {
             productId: +item.productId
           }
           itemQuantiy = +item.quantity;
+          let cartId = +item.cartId;
           this.productService.getProductById(cartItem).subscribe(product =>{
             const item:CartProducts={
+              cartId: cartId,
               productId: product.productId,
               productName: product.productName,
               pricePerKg: +product.pricePerKg,
               quantity: itemQuantiy,
               totalPrice: itemQuantiy*(+product.pricePerKg),
+              discount: itemQuantiy* ((+product.marketPrice)-(+product.pricePerKg)),
+              totalDiscount: itemQuantiy* ((+product.marketPrice)-(+product.pricePerKg)),
               image: product.image
             };
             this.productService.getImage(item.image).subscribe(image => {
@@ -132,6 +158,18 @@ export class ProductsCartService {
     catchError(this.handleError));
   }
 
+  deleteCartItem(id: number): Observable<boolean> {
+    const params = new HttpParams()
+      .set('cartId', id.toString());
+
+    return this.http.delete(`${this.baseUrl}/deleteCartItem.php`, { params: params })
+      .pipe(map(res => {
+        console.log("Product Deleted");
+        return true;
+      }),
+      catchError(this.handleError));
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     console.log(error);
@@ -142,6 +180,7 @@ export class ProductsCartService {
 
 
 export interface CartItems{
+  cartId: string;
   productId: string;
   quantity: string; 
 }

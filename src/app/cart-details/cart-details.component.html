@@ -36,7 +36,7 @@
             <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">{{product.totalPrice | currency:'INR':'symbol':'1.0-2' }}</span>
         </div>
         <div class="px-3 my-3 text-center">
-            <div class="cart-item-label">Discount</div><span class="text-xl font-weight-medium">$35.00</span>
+            <div class="cart-item-label">Discount</div><span class="text-xl font-weight-medium">{{product.totalDiscount | currency:'INR':'symbol':'1.0-2' }}</span>
         </div>
     </div>
     <!-- Cart Item-->
@@ -46,7 +46,7 @@
             <span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">
                 Discount:
             </span>
-            <span class="d-inline-block align-middle text-xl font-weight-medium">$35</span>
+            <span class="d-inline-block align-middle text-xl font-weight-medium">{{discount | currency:'INR':'symbol':'1.0-2' }}</span>
         </div>
     </div>
 
@@ -61,8 +61,16 @@
     <!-- Buttons-->
     <hr class="my-2">
     <div class="row pt-3 pb-5 mb-2">
-        <div class="col-sm-6 mb-3"><a class="btn btn-style-1 btn-info btn-block" href="#"><i class="fe-icon-refresh-ccw"></i>&nbsp;Continue Shopping</a></div>
-        <div class="col-sm-6 mb-3"><a class="btn btn-style-1 btn-info btn-block" [routerLink]="['/check-out']"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
+        <div class="col-sm-6 mb-3">
+            <a class="btn btn-style-1 btn-info btn-block" [routerLink]="['/main-page']">
+                <i class="fe-icon-refresh-ccw"></i>&nbsp;Continue Shopping
+            </a>
+        </div>
+        <div class="col-sm-6 mb-3">
+            <a class="btn btn-style-1 btn-info btn-block" (click)="onCheckout()" >
+                <i class="fe-icon-credit-card"></i>&nbsp;Checkout
+            </a>
+        </div>
     </div>
 
        

@@ -68,6 +68,7 @@ export class MainPageBodyComponent implements OnInit {
 
   addToCart(product) {
     this.productCartService.addToCart(product);
+    console.log("Added to cart");
     //window.alert('Your product has been added to the cart!');
     this.message = product.productName+" added to cart.";
     this.show = 'show';

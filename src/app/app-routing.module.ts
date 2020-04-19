@@ -14,6 +14,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { BillComponent } from './bill/bill.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'check-out', component:  CheckOutComponent},
   { path: 'payment', component:  PaymentComponent},
   { path: 'bill', component:  BillComponent},
+  { path: 'login', component: LoginComponent},
   { path: 'track-order', component:  TrackOrderComponent},
   { path: 'order-history', component:  OrderHistoryComponent},
   { path: '', redirectTo: 'main-page', pathMatch:"full"}

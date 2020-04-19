@@ -20,12 +20,14 @@ export class SelectedProducts extends Products{
 }
 
 export class CartProducts{
-
+  cartId: number;
   productId: number;
   productName: string;
   pricePerKg: number;
   quantity: number;
   totalPrice: number;
+  discount: number;
+  totalDiscount: number;
   image: string;
 }
 
