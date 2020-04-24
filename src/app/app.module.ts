@@ -27,6 +27,8 @@ import { TrackOrderComponent } from './track-order/track-order.component';
 import { RouterModule } from '@angular/router';
 import { LiveProductComponent } from './admin/live-product/live-product.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     BillComponent,
     LiveProductComponent,
     TrackOrderComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    ContactUsComponent,
+    AboutUsComponent
 
   ],
   imports: [
