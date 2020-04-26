@@ -19,18 +19,21 @@ export class ProductsCartService {
   products:CartProducts[] = [];
   subTotal = 0;
   exists: boolean = false;
+  discount: number = 0;
   constructor(private http: HttpClient,
     private loginService: LoginService,
     private productService: ProductsService) { }
 
   addToCart(product) {
     console.log("In Add Service");
+    console.log(this.products);
     this.products.forEach(element=>{
       if(element.productId === product.productId){
         this.exists = true;
       }
     });
     if(!this.exists){
+      console.log("In adding");
       const item:CartProducts={
         cartId: 1,
         productId: product.productId,
@@ -84,7 +87,9 @@ export class ProductsCartService {
     return this.products;
   }
 
-  getItems() {
+  getItems(): CartProducts[]{
+    this.subTotal = 0;
+    this.discount = 0;
     if(this.loginService.isUserLogin){
       this.products =[];
       const email: Login ={
@@ -124,7 +129,8 @@ export class ProductsCartService {
               console.log(error);
             });
             this.products.push(item);
-            
+            this.subTotal = this.subTotal + item.totalPrice;
+            this.discount = this.discount + item.totalDiscount;
           });
         }); 
       });

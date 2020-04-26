@@ -4,6 +4,7 @@ import { Products } from '../admin/product';
 import { LoginService } from '../login.service';
 import { ProductsCartService } from '../products-cart.service';
 import { FormControl } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-main-page-body',
@@ -34,7 +35,6 @@ export class MainPageBodyComponent implements OnInit {
     private productCartService: ProductsCartService) { }
 
   ngOnInit(): void {
-
     
     this.productService.getAllProducts().subscribe(
       (res: Products[]) =>{
@@ -55,6 +55,7 @@ export class MainPageBodyComponent implements OnInit {
         });
         this.filteredProducts = this.products
         console.log(this.products);
+        this.productService.product = this.products;
       }
     );
 

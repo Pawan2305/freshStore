@@ -46,14 +46,14 @@
             <span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">
                 Discount:
             </span>
-            <span class="d-inline-block align-middle text-xl font-weight-medium">{{discount | currency:'INR':'symbol':'1.0-2' }}</span>
+            <span class="d-inline-block align-middle text-xl font-weight-medium">{{productCartService.discount | currency:'INR':'symbol':'1.0-2' }}</span>
         </div>
     </div>
 
     <div class="d-sm-flex justify-content-between align-items-center text-center text-sm-left">
         <div class="py-2">
             <span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">
-                Subtotal:</span><span class="d-inline-block align-middle text-xl font-weight-medium">{{subTotal}}
+                Subtotal:</span><span class="d-inline-block align-middle text-xl font-weight-medium">{{productCartService.subTotal}}
             </span>
         </div>
     </div>

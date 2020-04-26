@@ -11,6 +11,7 @@ import { ProductsCartService } from '../products-cart.service';
 export class NavbarComponent implements OnInit {
 
   isLogin: boolean;
+  modal="";
 
   constructor(public loginService: LoginService,
     private router: Router,
@@ -40,6 +41,11 @@ export class NavbarComponent implements OnInit {
     this.loginService.username = null;
     this.productCartService.products =[];
     this.router.navigate(['/home', 'store']);
+  }
+
+  onTrackOrderSubmit(){
+    this.modal = "modal"
+    this.router.navigate(['/track-order']);
   }
 
 }

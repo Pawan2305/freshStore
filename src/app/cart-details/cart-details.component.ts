@@ -16,17 +16,14 @@ export class CartDetailsComponent implements OnInit {
   subTotal: number = 0;
   discount: number = 0;
   
-  constructor(private productCartService: ProductsCartService,
+  constructor(public productCartService: ProductsCartService,
     public loginService: LoginService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.products = this.productCartService.getItems();
-    console.log(this.products);
-    console.log(this.subTotal);
-    for(let i in this.products){
-      console.log(i);
-    }
+    //console.log(this.products);
+    //console.log(this.subTotal);
 
     this.products.forEach(element =>{
       this.subTotal = this.subTotal + element.totalPrice;
@@ -38,8 +35,8 @@ export class CartDetailsComponent implements OnInit {
     console.log("delete");
     console.log(product);
     this.products=this.productCartService.deleteItems(product);
-    this.subTotal = this.subTotal - product.totalPrice;
-    this.discount = this.discount - product.totalDiscount;
+    this.productCartService.subTotal = this.productCartService.subTotal - product.totalPrice;
+    this.productCartService.discount = this.productCartService.discount - product.totalDiscount;
   }
 
   onQuantity(product:CartProducts, $event){
@@ -55,11 +52,11 @@ export class CartDetailsComponent implements OnInit {
       return element;
     });
     console.log(this.products);
-    this.subTotal = 0;
-    this.discount = 0;
+    this.productCartService.subTotal = 0;
+    this.productCartService.discount = 0;
     this.products.forEach(element =>{
-      this.subTotal = this.subTotal + element.totalPrice;
-      this.discount = this.discount + element.totalDiscount;
+      this.productCartService.subTotal = this.productCartService.subTotal + element.totalPrice;
+      this.productCartService.discount = this.productCartService.discount + element.totalDiscount;
     });
     
   }

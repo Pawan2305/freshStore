@@ -11,12 +11,12 @@
                     <div class="card mt-1 border-0 first-card">
                         <!-- 1st Card -->
                         <!-- Basic dropdown -->
-                                
-                                <select class="custom-select d-block w-150 mt-2" id="country"  (click)="onPaymentMethod($event)" required>
-                                    <option value="">Payment Method</option>
-                                    <option value="cash">Cash On Delivery (COD)</option>
-                                    <option value="card">Card Payment</option>
-                                  </select>                    
+                        <select class="custom-select d-block w-150 mt-2" [ngModel]="paymentMethod" (ngModelChange)="onPaymentMethod($event)" required>
+                            <option value="">Payment Method</option>
+                            <option value="cash">Cash On Delivery (COD)</option>
+                            <option value="card">Card Payment</option>
+                        </select> 
+                                         
                        <!-- Basic dropdown -->
                     </div>
 
@@ -53,7 +53,7 @@
                             
                         </div>
 
-                        <h3 class="font-weight-bold">Discount: </h3>
+                        <h3 class="font-weight-bold">Discount : {{this.productCartService.discount | currency:'INR':'symbol':'1.0-2' }} </h3>
                         <div class="card mt-3 border-0 first-card"></div>
 
                         <h3 class="font-weight-bold">Delivery Charges : {{deliveryCharge | currency:'INR':'symbol':'1.0-2' }}</h3>
@@ -65,7 +65,7 @@
                         <div class="card-body">
                             <p class="card-text">Perfect Software Solution is a <span class="text-primary">professional software, website development</span> timely delivered and cost effective software,<span class="text-primary"> website development services</span>. We are highly experienced in offering offshore software development.</p>
                             
-                        <div class="card-footer"> <button type="submit" class="btn btn-primary btn-lg" [disabled]="!isPaymentMethodSelected" [routerLink]="['/bill']" >PAY</button> </div>
+                        <div class="card-footer"> <button type="submit" class="btn btn-primary btn-lg" [disabled]="!isPaymentMethodSelected" (click)="onPay()" >PAY</button> </div>
                     </div>
                     
                     

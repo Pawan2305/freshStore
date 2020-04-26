@@ -35,9 +35,9 @@
             </div>
             <div class="invoice-date">
                <small>Invoice / July period</small>
-               <div class="date text-inverse m-t-5">August 3,2012</div>
+               <div class="date text-inverse m-t-5">{{today | date:'longDate'}}</div>
                <div class="invoice-detail">
-                  #0000123DSS<br>
+                  #{{orderId}}<br>
                   Payment Method: {{paymentMethod}}
                </div>
             </div>
@@ -83,6 +83,13 @@
                      <div class="sub-price">
                         <small>DELIVERY CHARGES</small>
                         <span class="text-inverse">{{deliveryCharge | currency:'INR':'symbol':'1.0-2'}}</span>
+                     </div>
+                     <div class="sub-price">
+                        <i class="fa fa-minus text-muted"></i>
+                     </div>
+                     <div class="sub-price">
+                        <small>DISCOUNT</small>
+                        <span class="text-inverse">{{discount | currency:'INR':'symbol':'1.0-2'}}</span>
                      </div>
                   </div>
                </div>

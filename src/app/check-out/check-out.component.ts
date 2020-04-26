@@ -23,11 +23,12 @@ export class CheckOutComponent implements OnInit {
   total: number = 0;
   totalItem = 0;
   anotherAddress = false;
-  dType = '';
+  dType = 'Standard';
   deliveryCharge = 50;
   isAddressSelected = false;
+  discount: number = 0;
 
-  constructor(private productCartService: ProductsCartService,
+  constructor(public productCartService: ProductsCartService,
     private formBuilder: FormBuilder,
     private addressService: AddressService,
     private loginService: LoginService,
@@ -59,13 +60,13 @@ export class CheckOutComponent implements OnInit {
         console.log(res);
         this.address = res;
     });
+
+    this.total = this.productCartService.subTotal;
     
     this.products = this.productCartService.products;
-    let num;
+   
     this.products.forEach(element =>{
       this.totalItem = this.totalItem+1;
-      num = +element.totalPrice;
-      this.total = this.total + num;
     });
     this.total = this.total+ this.deliveryCharge;
   }
@@ -117,12 +118,16 @@ export class CheckOutComponent implements OnInit {
   deliveryType($event){
     this.total = this.total - this.deliveryCharge;
     if($event === "fast"){
-      this.deliveryCharge = 100;
+      this.dType = "Fast";
+      this.deliveryCharge = 100;   
     }else{
+      this.dType = "Standard";
       this.deliveryCharge = 50;
-      
     }
+    this.paymentService.deliveryType = this.dType;
     this.total = this.total + this.deliveryCharge;
+    this.paymentService.deliveryCharges = this.deliveryCharge;
+    this.paymentService.total = this.total;
   }
 
   onDeleteAddress(address: Address){
@@ -147,8 +152,6 @@ export class CheckOutComponent implements OnInit {
   selectedAddress(address: Address){
     this.addressService.deliveryAddress = address;
     this.isAddressSelected = true;
-    this.paymentService.deliveryCharges = this.deliveryCharge;
-    this.paymentService.total = this.total;
   }
 
 }
