@@ -17,6 +17,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { LoginComponent } from './login/login.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'order-history', component:  OrderHistoryComponent},
   { path: 'contact-us', component:  ContactUsComponent},
   { path: 'about-us', component:  AboutUsComponent},
+  { path: 'forget-password', component:  ForgetPasswordComponent},
   { path: '', redirectTo: 'main-page', pathMatch:"full"}
 ];
 

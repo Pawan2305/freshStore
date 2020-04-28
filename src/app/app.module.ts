@@ -29,6 +29,7 @@ import { LiveProductComponent } from './admin/live-product/live-product.componen
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     TrackOrderComponent,
     OrderHistoryComponent,
     ContactUsComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ForgetPasswordComponent
 
   ],
   imports: [

@@ -43,7 +43,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                 <p class="dropdown-item" >MY ACCOUNT</p>
                 <p class="dropdown-item" [routerLink]="['/order-history']" >ORDER HISTORY</p>
-                <p class="dropdown-item" >RESET PASSWORD</p>
+                <p class="dropdown-item" [routerLink]="['/forget-password']" >RESET PASSWORD</p>
                 <p class="dropdown-item" (click)="onLogout()">LOGOUT</p>
               </div>
             </div>
