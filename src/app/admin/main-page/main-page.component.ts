@@ -93,7 +93,7 @@ export class MainPageComponent implements OnInit {
       this.isImageLoading = false;
       console.log(error);
     });
-}
+  }
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
@@ -161,6 +161,9 @@ export class MainPageComponent implements OnInit {
   }
 
   editProduct(){
+    const cartItem = {
+      productId: +this.p.productId
+    }
     console.log(this.editProductForm.value);
     let product: Products = new Products();
     product.productId = this.p.productId;
@@ -169,30 +172,47 @@ export class MainPageComponent implements OnInit {
     product.pricePerKg = this.editProductForm.get('pricePerKg').value;
     product.marketPrice = this.editProductForm.get('marketPrice').value;
     product.totalQty = this.editProductForm.get('totalQty').value;
-    product.qtyRemain = this.editProductForm.get('totalQty').value;
-     
-    const formData:FormData = new FormData();
-    formData.append('file', this.fileToUpload);
-    this.productService.uploadImage(formData)
-     .subscribe((res) =>{
-        if(res){
-         alert("File Uploaded");
-          this.imageUrl= res;
-          product.image = res;
-          console.log(product);
-          this.productService.editProduct(product).subscribe((res)=>{
-            if(res=== true){
-              //window.alert("Product Added");
-              this.editProductForm.reset();
-              window.location.reload();
-            }else{
-              console.log("Unable to add data");
-            }
-          });
-        }else{
-          alert("Image Upload failed");
-        }
-    });
+    product.qtyRemain =  (+product.totalQty) - ((+this.p.totalQty)-(+this.p.qtyRemain));
+    if(this.fileToUpload){ 
+      const formData:FormData = new FormData();
+      formData.append('file', this.fileToUpload);
+      this.productService.uploadImage(formData)
+        .subscribe((res) =>{
+          if(res){
+            alert("File Uploaded");
+              this.imageUrl= res;
+              product.image = res;
+              console.log(product);
+              this.productService.editProduct(product).subscribe((res)=>{
+                if(res=== true){
+                  //window.alert("Product Added");
+                  this.editProductForm.reset();
+                  window.location.reload();
+                }else{
+                  console.log("Unable to add data");
+                }
+              });
+          }else{
+             alert("Image Upload failed");
+          }
+      });
+    }else{
+      let originalProducts: Products;
+      this.productService.getProductById(cartItem).subscribe(res => {
+        originalProducts = res;
+        product.image = originalProducts.image;
+        this.productService.editProduct(product).subscribe((res)=>{
+          if(res=== true){
+            //window.alert("Product Added");
+            this.editProductForm.reset();
+            window.location.reload();
+          }else{
+            console.log("Unable to add data");
+          }
+        });
+      });
+      
+    }
   }
 
 }

@@ -14,6 +14,9 @@ export class OrdersService {
   baseUrl = "http://localhost/api";
   orders: Orders[];
   orderDetails: OrderDetails[];
+  selectedOrder: Orders;
+  selectedOrderDetails: OrderDetails[]=[];
+  isSelected: boolean= false;
 
   constructor(private loginService: LoginService,
     private http: HttpClient) { }
@@ -45,6 +48,52 @@ export class OrdersService {
         return this.orderDetails;     
     }),
     catchError(this.handleError)); 
+  }
+
+  getPlacedOrders(): Observable<Orders[]>{
+    return this.http.get(`${this.baseUrl}/orders/orderPlacedList.php`).pipe(
+      map((res) => {
+        const data = res['data'];
+        console.log(data) ;
+        this.orders = data;
+        //console.log(this.orderDetails);
+        return this.orders;
+    }),
+    catchError(this.handleError));  
+  }
+
+  getDeliveredOrders(): Observable<Orders[]>{
+    return this.http.get(`${this.baseUrl}/orders/orderDeliverList.php`).pipe(
+      map((res) => {
+        const data = res['data'];
+        console.log(data) ;
+        this.orders = data;
+        //console.log(this.orderDetails);
+        return this.orders;
+    }),
+    catchError(this.handleError));  
+  }
+
+  getCancelledOrders(): Observable<Orders[]>{
+    return this.http.get(`${this.baseUrl}/orders/orderCancelList.php`).pipe(
+      map((res) => {
+        const data = res['data'];
+        console.log(data) ;
+        this.orders = data;
+        //console.log(this.orderDetails);
+        return this.orders;
+    }),
+    catchError(this.handleError));  
+  }
+
+  updateOrderStatus(order: Orders): Observable<boolean>{
+    return this.http.put(`${this.baseUrl}/orders/updateOrder.php`, { data: order })
+      .pipe(map((res) => {
+        console.log(res);
+        console.log(" Order Updated");
+        return true;
+      }),
+      catchError(this.handleError)); 
   }
 
   private handleError(error: HttpErrorResponse) {

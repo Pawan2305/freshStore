@@ -4,6 +4,9 @@ import { PaymentService } from '../payment.service';
 import { ProductsCartService } from '../products-cart.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { OrdersService } from '../orders.service';
+import { ProductsService } from '../admin/products.service';
+import { Products } from '../admin/product';
 
 @Component({
   selector: 'app-payment',
@@ -23,7 +26,9 @@ export class PaymentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private paymentService: PaymentService,
     public productCartService: ProductsCartService,
-    private router: Router ) { }
+    private router: Router,
+    private orderService: OrdersService,
+    private productService: ProductsService ) { }
 
   ngOnInit(): void {
 
@@ -51,17 +56,36 @@ export class PaymentComponent implements OnInit {
         this.productCartService.products.forEach(element =>{
           this.paymentService.addOrderDetails(element).subscribe(result =>{
             if(result){
-              console.log("Order product added");
+              const item = {
+                productId: +element.productId
+              }
+              let originalProducts: Products;
+              this.productService.getProductById(item).subscribe(res => {
+                originalProducts = res;
+                originalProducts.qtyRemain = (+originalProducts.qtyRemain)-(+element.quantity);
+                console.log(this.productService.orginalProduct);
+                this.productService.editProduct(originalProducts).subscribe((res)=>{
+                  if(res=== true){
+                    console.log("Product quantity deducted")  
+                  }else{
+                    console.log("Unable to add data");
+                  }
+                });
+              });
+              
             }else{
               console.log("Not Added");
             }
           });
+          
+          
         })
       }else{
         console.log("UnSuccess");
       }
     });
-
+    
+    this.orderService.isSelected = false;
     this.router.navigate(['bill']);
   }
 

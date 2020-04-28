@@ -15,45 +15,28 @@
     <thead>
       <tr>
 
-        <th class="th-sm">S.No
-
-        </th>
-        
-        <th class="th-sm">Customer Name
-
-        </th>
-        <th class="th-sm">Mobile No.
-
-        </th>
-        <th class="th-sm">Order No.
-
-        </th>
-        <th class="th-sm">Delivery Type
-
-        </th>
-        <th class="th-sm">Total Amount 
-
-        </th>
-        <th class="th-sm">Cancelled Date
-
-        </th>
-        <th class="th-sm">Cancelled Reason
-     
- 
-
-        </th>
+        <th class="th-sm">S.No</th>     
+        <th class="th-sm">Customer Name</th>
+        <th class="th-sm">Mobile No.</th>
+        <th class="th-sm">Order No.</th>
+        <th class="th-sm">Order Date</th>
+        <th class="th-sm">Delivery Type</th>
+        <th class="th-sm">Total Amount </th>
+        <th class="th-sm">Cancelled Date</th>
+        <th class="th-sm">Cancelled Reason</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1.</td>
-        <td>Pawan kumar</td>
-        <td>8130516445</td>
-        <td>12543</td>
-        <td>Fast</td>
-        <td>650</td>
-        <td>23/04/2020</td>
-        <td>No Cash</td>
+      <tr *ngFor="let order of orders; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{order.customerName}}</td>
+        <td>{{order.phone}}</td>
+        <td>{{order.orderId}}</td>
+        <td>{{order.orderDate}}</td>
+        <td>{{order.deliveryType}}</td>
+        <td>{{order.totalAmt}}</td>
+        <td>{{order.cancelDate}}</td>
+        <td>{{order.cancelReason}}</td>
       </tr>
     </tbody>
 </table>

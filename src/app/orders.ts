@@ -1,6 +1,8 @@
 export interface Orders{
     orderId: number;
     customerEmail: string; 
+    customerName?: string;
+    phone?: string; 
     deliveryType: string;
     addressId: number;
     orderDate: string;
@@ -10,6 +12,8 @@ export interface Orders{
     orderStatus: string;
     totalAmt: number;
     totalDiscount: number;
+    cancelDate?: string;
+    cancelReason?: string;
 }
 
 export interface OrderDetails{

@@ -12,6 +12,7 @@ export class ProductsService {
 
   baseUrl = "http://localhost/api";
   product: Products[];
+  orginalProduct: Products[];
   selectedProduct: SelectedProducts = new SelectedProducts();
                 
   constructor(private http: HttpClient) { }
@@ -28,6 +29,9 @@ export class ProductsService {
     return this.http.get(`${this.baseUrl}/productList.php`).pipe(
       map((res) => {
         this.product = res['data'];
+        console.log(res['data']);
+        this.orginalProduct = res['data'];
+        console.log(this.orginalProduct);
         return this.product;
     }),
     catchError(this.handleError));

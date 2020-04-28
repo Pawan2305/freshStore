@@ -3,6 +3,7 @@ import { Login } from './login/login';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { signup } from './sign-up/sign-up';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,13 +40,19 @@ export class LoginService {
     catchError(this.handleError));
   }
 
-  getUserName(email: Login):Observable<string>{
+  getUserName(email: Login):Observable<signup>{
     return this.http.post(`${this.baseUrl}/customer.php`, { data: email}).pipe(
       map((res) => {
         this.username = res['customerName'];
         this.customerId = res['email'];
         console.log(this.username);
-        return this.username;
+        let user: signup = {
+          name: res['customerName'],
+          email: res['email'],
+          phoneNo: res['phone'],
+          password: ""
+        }
+        return user;
     }),
     catchError(this.handleError));
   }

@@ -35,7 +35,8 @@
             </div>
             <div class="invoice-date">
                <small>Invoice / July period</small>
-               <div class="date text-inverse m-t-5">{{today | date:'longDate'}}</div>
+               <div class="date text-inverse m-t-5" *ngIf= "!orderService.isSelected">{{today | date:'longDate'}}</div>
+               <div class="date text-inverse m-t-5" *ngIf= "orderService.isSelected">{{today}}</div>
                <div class="invoice-detail">
                   #{{orderId}}<br>
                   Payment Method: {{paymentMethod}}
@@ -63,7 +64,8 @@
                         </td>
                         <td class="text-center">{{product.pricePerKg | currency:'INR':'symbol':'1.0-2'}}</td>
                         <td class="text-center">{{product.quantity}}kg</td>
-                        <td class="text-right">{{product.totalPrice | currency:'INR':'symbol':'1.0-2'}}</td>
+                        <td class="text-right" *ngIf= "!orderService.isSelected">{{product.totalPrice | currency:'INR':'symbol':'1.0-2'}}</td>
+                        <td class="text-right" *ngIf= "orderService.isSelected">{{product.price | currency:'INR':'symbol':'1.0-2'}}</td>
                      </tr>
                   </tbody>
                </table>
