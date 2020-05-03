@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsCartService } from '../products-cart.service';
+import { ProductsService } from '../admin/products.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(public loginService: LoginService,
     private router: Router,
-    private productCartService: ProductsCartService) { }
+    private productCartService: ProductsCartService,
+    private productService: ProductsService) { }
 
   ngOnInit(): void {
     const log =this.loginService.getIsLogin();
@@ -30,6 +32,7 @@ export class NavbarComponent implements OnInit {
   onFruit(){
     console.log("fruit");
     this.loginService.category = "Fruit";
+    this.router.navigate(['/home','Fruit']);
   }
 
   onHome(){

@@ -3,45 +3,58 @@
 </div>
 
 <div>
-  <button (click)="onBack()">Back</button>
+  <button (click)="onBack()" class="btn">Back</button>
+  <button class="btn" style="float: right;" (click)="showGraph()"> {{showGraphFlag ? "See Table" : "See Graph"}}</button>
+</div>
+<div class="row">
+  <form class="form-inline mr-auto">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search Product" aria-label="Search">
+    <i class="fas fa-search input-prefix" aria-hidden="true"></i>  
+  </form>
+
+  <form class="form-inline mr-5" (ngSubmit)="getOrders()" [formGroup]="rangeForm">
+    <label> Enter start and end date: 
+      <input class="form-control mr-sm-5" type="date" placeholder="Start Date" formControlName="startDate"> 
+    </label>
+    <label>To
+      <input class="form-control mr-sm-2" type="date" placeholder="End Date" aria-label="Date" formControlName="endDate">
+    </label>
+    <button type="submit" class="btn">Go</button>
+  </form>
 </div>
 
-<form class="form-inline mr-auto">
-  <input class="form-control mr-sm-2" type="text" placeholder="Search Product" aria-label="Search">
-  <i class="fas fa-search input-prefix" aria-hidden="true"></i>  
-</form>
-
-<table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<table *ngIf="!showGraphFlag;" id="dtBasicExample" class="table table-striped table-bordered scroll" cellspacing="0" width="100%" >
     <thead>
       <tr>
-
-        <th class="th-sm">S.No
-
-        </th>
-        
-        <th class="th-sm">Product Name
-
-        </th>
-        <th class="th-sm">Category
-
-        </th>
-        <th class="th-sm">Total Quantity Sale
-
-        </th>
-        <th class="th-sm">Total Sale Quantity
-
-        </th>
-        
+        <th class="th-sm">S.No</th>
+        <th class="th-sm">Product Name</th>
+        <th class="th-sm">Category</th>
+        <th class="th-sm">Price/Kg</th>
+        <th class="th-sm">Total Quantity Sale</th>
+        <th class="th-sm">Total Amount</th>        
       </tr>
     </thead>
     <tbody>
+      <tr *ngFor="let product of products; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{product.productName}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.pricePerKg}}</td>
+        <td>{{product.totalQtySale}} Kg</td>
+        <td>{{product.totalEarnings | currency:'INR':'symbol':'1.0-2'}}</td>
+      </tr>
       <tr>
-        <td>1.</td>
-        <td>Apple</td>
-        <td>Fruit</td>
-        <td>250 KG</td>
-        <td>Rs. 70,600</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Sale</td>
+        <td>{{totalSale | currency:'INR':'symbol':'1.0-2'}}</td>
       </tr>
     </tbody>
 </table>
+
+
+
+<div  id="chartContainer" style="height: 500px; width: 70%; margin-left: auto; margin-right: auto;" ></div>
 

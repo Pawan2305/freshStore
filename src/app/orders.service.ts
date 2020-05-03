@@ -12,6 +12,7 @@ import { map, catchError } from 'rxjs/operators';
 export class OrdersService {
 
   baseUrl = "http://localhost/api";
+  allOrders: Orders[];
   orders: Orders[];
   orderDetails: OrderDetails[];
   selectedOrder: Orders;
@@ -20,6 +21,17 @@ export class OrdersService {
 
   constructor(private loginService: LoginService,
     private http: HttpClient) { }
+
+  
+  getAllOrders(): Observable<Orders[]> {
+    return this.http.get(`${this.baseUrl}/orders/getAllOrders.php`).pipe(
+      map((res) => {
+        this.allOrders = res['data'];
+        console.log(this.allOrders);
+        return this.allOrders;
+      }),
+      catchError(this.handleError));
+  }
 
   getOrders(): Observable<Orders[]>{
     const email: Login ={

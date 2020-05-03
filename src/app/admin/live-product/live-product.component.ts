@@ -3,9 +3,15 @@ import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/orders.service';
 import { LoginService } from 'src/app/login.service';
 import { Login } from 'src/app/login/login';
-import { Orders } from 'src/app/orders';
+import { Orders, OrderDetails, ProductDetails } from 'src/app/orders';
 import { formatDate } from '@angular/common';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ProductsService } from '../products.service';
+import { Products } from '../product';
+import { ToastrService } from 'ngx-toastr';
+import { Address } from 'src/app/address';
+import { AddressService } from 'src/app/address.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-live-product',
@@ -17,11 +23,23 @@ export class LiveProductComponent implements OnInit {
   cancelForm: FormGroup;
   orders: Orders[];
   cancelOrder: Orders;
+  orderDetails: OrderDetails[];
+  productDetails: ProductDetails[] = [];
+  show: string = '';
+  message: string;
+  expanded: boolean = false;
+  address: Address;
+  orderId;
+  isImageLoading: boolean;
+  imageWidth = 70;
+  imageMargin = 2;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private orderService: OrdersService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private productService: ProductsService,
+    private addressService: AddressService) { }
 
   ngOnInit(): void {
     this.cancelForm = this.formBuilder.group({
@@ -69,6 +87,12 @@ export class LiveProductComponent implements OnInit {
         });
       }
     });
+
+    this.message ="Order No-"+ order.orderId+" is shipped.";
+    this.show = 'show';
+    setTimeout(()=>{    
+      this.show = ' ';
+    }, 3000);
   }
 
   onDelivered(order: Orders){
@@ -89,6 +113,12 @@ export class LiveProductComponent implements OnInit {
         }
       }
     });
+
+    this.message = "Order No-"+ order.orderId+" is delivered. Go to delivered orders page for details.";
+    this.show = 'show';
+    setTimeout(()=>{    
+      this.show = ' ';
+    }, 3000);
   }
 
   onCancel(order: Orders){
@@ -113,6 +143,78 @@ export class LiveProductComponent implements OnInit {
           this.orders.splice(index, 1);
         }
       }
+    });
+
+    this.orderService.getOrderDetails(this.cancelOrder.orderId).subscribe(
+      res =>{
+        this.orderDetails = res;
+        console.log(this.orderDetails);
+        this.orderDetails.forEach(item =>{
+          const cartItem = {
+            productId: +item.productId
+          }
+          let product: Products;
+          this.productService.getProductById(cartItem).subscribe(res => {
+            product = res;
+            product.qtyRemain = (+product.qtyRemain) + (+item.quantity);
+            this.productService.editProduct(product).subscribe((res)=>{
+              if(res=== true){
+              //window.alert("Product Added");
+                console.log("product qunatity added");
+                //window.location.reload();
+              }else{
+              console.log("Unable to add data");
+              }
+            });
+          });
+        });
+
+      }
+    );
+
+    this.message = "Order No-"+order.orderId+" is Cancellec. Go to cancelled orders page for details.";
+    this.show = 'show';
+    setTimeout(()=>{    
+      this.show = ' ';
+    }, 3000);
+    
+  }
+
+  onShowDetails(order: Orders){
+    this.address = null;
+    this.productDetails = [];
+    this.orderId = order.orderId;
+    console.log(order);
+    const email: Login ={
+      loginId: order.customerEmail,
+      pswd: ""
+    }
+    this.addressService.getAddress(email).subscribe(
+      res =>{
+        this.address = res.find(address => address.addressId === order.addressId);
+        console.log(this.address);
+      }
+    );
+
+    this.orderService.getOrderDetails(order.orderId).subscribe(result =>{
+      result.forEach(item =>{
+        let product = this.productService.product.find(prod => prod.productId === item.productId);
+        let productDetail: ProductDetails = {...item, productName: product.productName, pricePerKg: product.pricePerKg, image: product.image, category: product.category};
+        this.productService.getImage(product.image).subscribe(image => {
+          let reader = new FileReader();
+          reader.addEventListener("load", () => {
+             productDetail.image = <string>reader.result;
+             this.productDetails.push(productDetail);
+          }, false);
+          if (image) {
+             reader.readAsDataURL(image);
+          }
+        }, error => {
+          console.log(error);
+        });
+        
+        console.log(this.productDetails);
+      });
     });
   }
 

@@ -35,6 +35,7 @@ export class MainPageBodyComponent implements OnInit {
     private productCartService: ProductsCartService) { }
 
   ngOnInit(): void {
+
     
     this.productService.getAllProducts().subscribe(
       (res: Products[]) =>{
@@ -85,6 +86,21 @@ export class MainPageBodyComponent implements OnInit {
       this.isShow = false;
       this.show = " ";
     }, 3000);
+  }
+
+  onFruit(){
+    console.log(this.filteredProducts);
+    this.filteredProducts = this.products;
+    this.filteredProducts = this.filteredProducts.filter(x => x.category === "Fruit");
+  }
+
+  onVegetable(){
+    this.filteredProducts = this.products;
+    this.filteredProducts = this.filteredProducts.filter(x => x.category === "Vegetable");
+  }
+
+  onAll(){
+    this.filteredProducts = this.products;
   }
 
 }

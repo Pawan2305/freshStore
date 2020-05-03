@@ -29,4 +29,5 @@ export interface ProductDetails extends OrderDetails{
     productName: string;
     pricePerKg: number;
     image: string;
+    category?: string;
 }
