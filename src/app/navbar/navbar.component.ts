@@ -3,6 +3,8 @@ import { LoginService } from '../login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsCartService } from '../products-cart.service';
 import { ProductsService } from '../admin/products.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { OrdersService } from '../orders.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +15,20 @@ export class NavbarComponent implements OnInit {
 
   isLogin: boolean;
   modal="";
+  trackForm:FormGroup;
 
   constructor(public loginService: LoginService,
     private router: Router,
     private productCartService: ProductsCartService,
-    private productService: ProductsService) { }
+    private formBuilder: FormBuilder,
+    private productService: ProductsService,
+    private orderService: OrdersService) { }
 
   ngOnInit(): void {
+    this.trackForm = this.formBuilder.group({
+      orderId: ''
+    });
+
     const log =this.loginService.getIsLogin();
     if(log==="admin"){
       this.isLogin = false;
@@ -47,6 +56,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onTrackOrderSubmit(){
+    this.orderService.trackOrderId = +(this.trackForm.get('orderId').value);
     this.modal = "modal"
     this.router.navigate(['/track-order']);
   }

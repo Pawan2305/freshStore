@@ -19,6 +19,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { MainPageComponent } from './admin/main-page/main-page.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'contact-us', component:  ContactUsComponent},
   { path: 'about-us', component:  AboutUsComponent},
   { path: 'forget-password', component:  ForgetPasswordComponent},
+  { path: 'admin/products', component: MainPageComponent},
   { path: 'admin/admin-dashboard', component:  AdminDashboardComponent},
   { path: '', redirectTo: 'main-page', pathMatch:"full"}
 ];

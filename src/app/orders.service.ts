@@ -14,10 +14,12 @@ export class OrdersService {
   baseUrl = "http://localhost/api";
   allOrders: Orders[];
   orders: Orders[];
+  order: Orders[];
   orderDetails: OrderDetails[];
   selectedOrder: Orders;
   selectedOrderDetails: OrderDetails[]=[];
   isSelected: boolean= false;
+  trackOrderId: number;
 
   constructor(private loginService: LoginService,
     private http: HttpClient) { }
@@ -31,6 +33,21 @@ export class OrdersService {
         return this.allOrders;
       }),
       catchError(this.handleError));
+  }
+
+  getOrderById(): Observable<Orders[]>{
+    const order={
+      orderId: this.trackOrderId,
+      pswd: ""
+    }
+    return this.http.post(`${this.baseUrl}/orders/getOrderById.php`,{ data: order}).pipe(
+      map((res) => {
+        const data = res['data'];
+        console.log(data) ;
+        this.order = data;
+        return this.order;
+    }),
+    catchError(this.handleError));  
   }
 
   getOrders(): Observable<Orders[]>{

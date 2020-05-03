@@ -1,49 +1,44 @@
-<div>
-  <div class="md-form mb-3">
-    <i class="fas fa-user prefix"></i>
-    <input type="text" id="inputIconEx2" class="form-control">
-    <label for="inputIconEx2">E-mail address</label>
-  </div>
-</div>
 <div class="container padding-bottom-3x mb-1">
         <div class="card mb-3">
-          <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Tracking Order No - </span><span class="text-medium">34VB5540K83</span></div>
+          <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Tracking Order No - </span><span class="text-medium">{{order.orderId}}</span></div>
           <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
             <div class="w-100 text-center py-1 px-2"><span class="text-medium">Shipped Via:</span> UPS Ground</div>
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> Checking Quality</div>
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Expected Date:</span> SEP 09, 2017</div>
+            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> {{order.orderStatus}}</div>
+            <div class="w-100 text-center py-1 px-2" *ngIf="order.orderStatus === 'Placed' "><span class="text-medium">Order Date:</span> {{order.orderDate}}</div>
+            <div class="w-100 text-center py-1 px-2" *ngIf="order.orderStatus === 'Shipped' "><span class="text-medium">Shipped Date:</span> {{order.shipDate}}</div>
+            <div class="w-100 text-center py-1 px-2" *ngIf="order.orderStatus === 'Delivered' "><span class="text-medium">Delivery Date:</span> {{order.deliveryDate}}</div>
           </div>
           <div class="card-body">
             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-              <div class="step completed">
+              <div [className]=" placed ? 'step completed' : 'step'">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-cart"></i></div>
                 </div>
-                <h4 class="step-title">Confirmed Order</h4>
+                <h4 class="step-title">Order Placed</h4>
               </div>
-              <div class="step completed">
+              <div [className]=" placed ? 'step completed' : 'step'">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-config"></i></div>
                 </div>
-                <h4 class="step-title">Processing Order</h4>
+                <h4 class="step-title">Order Confirmed</h4>
               </div>
-              <div class="step completed">
+              <div [className]="shipped ? 'step completed' : 'step'">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-medal"></i></div>
                 </div>
-                <h4 class="step-title">Quality Check</h4>
+                <h4 class="step-title">Shipped</h4>
               </div>
-              <div class="step">
+              <div [className]="shipped ? 'step completed' : 'step'">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-car"></i></div>
                 </div>
                 <h4 class="step-title">Product Dispatched</h4>
               </div>
-              <div class="step">
+              <div [className]="delivered ? 'step completed' : 'step'">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-home"></i></div>
                 </div>
-                <h4 class="step-title">Product Delivered</h4>
+                <h4 class="step-title">Order Delivered</h4>
               </div>
             </div>
           </div>
@@ -53,6 +48,63 @@
             <input class="custom-control-input" type="checkbox" id="notify_me" checked="">
             <label class="custom-control-label" for="notify_me">Notify me when order is delivered</label>
           </div>
-          <div class="text-left text-sm-right" [routerLink]="['/bill']"><a class="btn btn-outline-primary btn-rounded btn-sm" href="orderDetails" data-toggle="modal" data-target="#orderDetails">View Order Details</a></div>
+          <div class="text-left text-sm-right" ><a class="btn btn-outline-primary btn-rounded btn-sm" (click)="onViewOrderDetails()">View Order Details</a></div>
         </div>
       </div>
+
+<div *ngIf="onView">
+  <div class="card" width="100%">
+        <div class="card-body">
+          <div class="row">
+            <p style="padding-left: 20px;"> Delivery Address :-</p>
+            <ul class="card-text list-group list-group-flush" style="list-style-type:none; text-align: left; padding-left: 10px;">
+              <li><strong>{{address.firstName}} {{address.lastName}}</strong> </li>
+              <li>{{address.address1}}</li>
+              <li>{{address.address2}}</li>
+              <li>{{address.city}} {{address.zipCode}}</li>
+              <li>{{address.state}}</li>
+              <li>Phone number: {{address.mobileNo}}‬</li>
+            </ul>
+            <ul class="card-text list-group list-group-flush" style="list-style-type:none; text-align: left; padding-left: 700px;">
+              <li><strong>Order Date: </strong> {{order.orderDate}}</li>
+              <li><strong>Delivery Type:</strong>{{order.deliveryType}}</li>
+              <li><strong>Delivery Charge: </strong>{{order.deliveryCharge | currency:'INR':'symbol':'1.0-2'}}</li>
+              <li><strong>Discount: </strong>{{order.totalDiscount | currency:'INR':'symbol':'1.0-2'}}</li>
+              <li><strong>Total Amount: </strong>{{order.totalAmt | currency:'INR':'symbol':'1.0-2'}}</li>
+              <li><strong>Payment Method: </strong></li> 
+              <li><strong>Delivery Date:</strong>{{order.deliveryDate? order.deliveryDate: "Not Yet delivered"}}</li>
+            </ul>
+          </div>
+          <table class="table table-bordered ">
+            <thead>
+              <tr>
+                <th class="th-sm" width="20px;">S.No</th>
+                <td class="th-sm"> Image</td>
+                <th class="th-sm">Product Name</th>
+                <th class="th-sm">Category</th>
+                <th class="th-sm">Quantity</th>
+                <th class="th-sm">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of productDetails; let j = index;">
+                <td width="20px;">{{j+1}}</td>
+                  <td *ngIf = "product.orderId === order.orderId" style="text-align: center;">
+                    <img *ngIf="product.image"
+                        [src]="product.image"
+                        [title]="product.productName"
+                        [style.width.px]="imageWidth"
+                        [style.margin.px]="imageMargin">
+                  </td>
+                <td>{{product.productName}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.quantity}}Kg</td>
+                <td>{{product.price | currency:'INR':'symbol':'1.0-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        
+        </div>
+      </div>
+
+    </div>
