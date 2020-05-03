@@ -30,6 +30,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     OrderHistoryComponent,
     ContactUsComponent,
     AboutUsComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    AdminDashboardComponent
 
   ],
   imports: [
