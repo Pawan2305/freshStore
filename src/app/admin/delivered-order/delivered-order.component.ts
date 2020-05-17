@@ -14,9 +14,26 @@ export class DeliveredOrderComponent implements OnInit {
 
   orders: Orders[];
 
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredOrders = this.listFilter ? this.performFilter(this.listFilter) : this.orders;
+  }
+
+  filteredOrders: Orders[] = [];
+
   constructor(private router: Router,
     private orderService: OrdersService,
     private loginService: LoginService) { }
+
+    performFilter(filterBy: string): Orders[] {
+      filterBy = filterBy.toLocaleLowerCase();
+      return this.orders.filter((order: Orders) =>
+        order.orderId.toString().toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
 
   ngOnInit(): void {
     this.orderService.getDeliveredOrders().subscribe(res=>
@@ -33,6 +50,8 @@ export class DeliveredOrderComponent implements OnInit {
             item.phone = user.phoneNo.toString();
           });
         });
+
+        this.filteredOrders = this.orders;
         
       });
   }

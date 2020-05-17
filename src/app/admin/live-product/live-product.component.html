@@ -3,14 +3,10 @@
   <h2>LIVE ORDERS</h2>
 </div>
 
-
-<div>
-  <button (click)="onBack()">Back</button>
-</div>
-<form class="form-inline mr-auto">
-  <input class="form-control mr-sm-2" type="text" placeholder="Search Product" aria-label="Search">
+<div class="form-inline mr-auto">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search Order No." aria-label="Search"  [(ngModel)]="listFilter">
   <i class="fas fa-search input-prefix" aria-hidden="true"></i>
-</form>
+</div>
 <table id="dtBasicExample" class="table  table-bordered  table-hover" cellspacing="0" width="100%">
   <thead>
     <tr>
@@ -26,7 +22,7 @@
       <th class="th-sm text-center">Action</th>
     </tr>
   </thead>
-  <tbody *ngFor="let order of orders; let i = index">
+  <tbody *ngFor="let order of filteredOrders; let i = index">
     <tr class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne" (click)=onShowDetails(order)>
       <td style="width: 20px;">{{i+1}}</td>
       <td>{{order.customerName}}</td>

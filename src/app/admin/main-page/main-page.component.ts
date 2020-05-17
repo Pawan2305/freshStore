@@ -22,6 +22,8 @@ export class MainPageComponent implements OnInit {
   imageToShow: any;
   isImageLoading: boolean;
   imageUrl: string;
+  show: string = '';
+  message: string;
 
   fileToUpload: File = null;
 
@@ -58,6 +60,11 @@ export class MainPageComponent implements OnInit {
       image: null
     });
 
+    this.getAllProducts();
+    
+  }
+
+  getAllProducts(){
     this.productService.getAllProducts().subscribe(
       (res: Products[]) =>{
         this.products = res;
@@ -79,36 +86,12 @@ export class MainPageComponent implements OnInit {
         });
 
         this.filteredProducts = this.selectedProduct;
-        console.log(this.selectedProduct);
       }
     );
-    console.log("Who is logged in"+this.loginService.getIsLogin());
-  }
-  getImageFromService() {
-    this.isImageLoading = true;
-    this.productService.getImage(this.imageUrl).subscribe(data => {
-      this.createImageFromBlob(data);
-      this.isImageLoading = false;
-    }, error => {
-      this.isImageLoading = false;
-      console.log(error);
-    });
   }
 
-  createImageFromBlob(image: Blob) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-       this.imageToShow = reader.result;
-    }, false);
- 
-    if (image) {
-       reader.readAsDataURL(image);
-    }
-   }
-
-  onBack(){
-    this.loginService.isLogin = true;
-    this.router.navigate(['main-page']);
+  onRefresh(){
+   this.getAllProducts();
   }
 
   onDeleteYes(){
@@ -116,7 +99,11 @@ export class MainPageComponent implements OnInit {
       (res: boolean) =>{
         if(res){
           console.log("Product Deleted");
-          window.location.reload();
+          this.message = this.p.productName+" deleted";
+          this.show = 'show';
+          setTimeout(()=>{    
+            this.show = ' ';
+          }, 3000);
         }
         else{
           console.log("Product Not deleted");
@@ -179,15 +166,19 @@ export class MainPageComponent implements OnInit {
       this.productService.uploadImage(formData)
         .subscribe((res) =>{
           if(res){
-            alert("File Uploaded");
               this.imageUrl= res;
               product.image = res;
               console.log(product);
               this.productService.editProduct(product).subscribe((res)=>{
                 if(res=== true){
-                  //window.alert("Product Added");
+                  
                   this.editProductForm.reset();
-                  window.location.reload();
+                  this.message = product.productName+" edited";
+                  this.show = 'show';
+                  setTimeout(()=>{    
+                    this.show = ' ';
+                  }, 3000);
+                  this.getAllProducts();
                 }else{
                   console.log("Unable to add data");
                 }
@@ -203,9 +194,14 @@ export class MainPageComponent implements OnInit {
         product.image = originalProducts.image;
         this.productService.editProduct(product).subscribe((res)=>{
           if(res=== true){
-            //window.alert("Product Added");
+          
             this.editProductForm.reset();
-            window.location.reload();
+            this.message = product.productName+" edited.";
+            this.show = 'show';
+            this.getAllProducts();
+            setTimeout(()=>{    
+              this.show = ' ';
+            }, 3000);
           }else{
             console.log("Unable to add data");
           }

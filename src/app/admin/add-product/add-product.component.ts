@@ -15,6 +15,8 @@ export class AddProductComponent implements OnInit {
   product: Products = new Products();
   fileToUpload: File = null;
   imageUrl: String;
+  show: string = '';
+  message: string;
 
   constructor(private router: Router,
         private formBuilder: FormBuilder,
@@ -52,7 +54,7 @@ export class AddProductComponent implements OnInit {
     this.productService.uploadImage(formData)
      .subscribe((res) =>{
         if(res){
-         alert("File Uploaded");
+        
           this.imageUrl= res;
           this.product.image = res;
           console.log(this.product);
@@ -61,7 +63,11 @@ export class AddProductComponent implements OnInit {
               //window.alert("Product Added");
               this.addProductForm.reset();
               console.log(this.product);
-              window.location.reload();
+              this.message = this.product.productName+" added.";
+              this.show = 'show';
+              setTimeout(()=>{    
+                this.show = ' ';
+              }, 3000);
             }else{
               console.log("Unable to add data");
             }

@@ -34,12 +34,30 @@ export class LiveProductComponent implements OnInit {
   imageWidth = 70;
   imageMargin = 2;
 
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredOrders = this.listFilter ? this.performFilter(this.listFilter) : this.orders;
+  }
+
+  filteredOrders: Orders[] = [];
+
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private orderService: OrdersService,
     private loginService: LoginService,
     private productService: ProductsService,
     private addressService: AddressService) { }
+
+    performFilter(filterBy: string): Orders[] {
+      filterBy = filterBy.toLocaleLowerCase();
+      return this.orders.filter((order: Orders) =>
+        order.orderId.toString().toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
 
   ngOnInit(): void {
     this.cancelForm = this.formBuilder.group({
@@ -60,12 +78,8 @@ export class LiveProductComponent implements OnInit {
           item.phone = user.phoneNo.toString();
         });
       });
-      
+      this.filteredOrders = this.orders;
     });
-  }
-
-  onBack(){
-    this.router.navigate(['admin']);
   }
 
   onShip(order: Orders){
@@ -198,20 +212,26 @@ export class LiveProductComponent implements OnInit {
 
     this.orderService.getOrderDetails(order.orderId).subscribe(result =>{
       result.forEach(item =>{
-        let product = this.productService.product.find(prod => prod.productId === item.productId);
-        let productDetail: ProductDetails = {...item, productName: product.productName, pricePerKg: product.pricePerKg, image: product.image, category: product.category};
-        this.productService.getImage(product.image).subscribe(image => {
-          let reader = new FileReader();
-          reader.addEventListener("load", () => {
-             productDetail.image = <string>reader.result;
-             this.productDetails.push(productDetail);
-          }, false);
-          if (image) {
-             reader.readAsDataURL(image);
+        
+        this.productService.getAllProducts().subscribe(
+          res => {
+            let product: Products = res.find(prod => prod.productId === item.productId);
+            let productDetail: ProductDetails = {...item, productName: product.productName, pricePerKg: product.pricePerKg, image: product.image, category: product.category};
+            this.productService.getImage(product.image).subscribe(image => {
+              let reader = new FileReader();
+              reader.addEventListener("load", () => {
+                productDetail.image = <string>reader.result;
+                this.productDetails.push(productDetail);
+              }, false);
+              if (image) {
+                reader.readAsDataURL(image);
+              }
+            }, error => {
+              console.log(error);
+            });
           }
-        }, error => {
-          console.log(error);
-        });
+        );
+        
         
         console.log(this.productDetails);
       });

@@ -13,6 +13,11 @@ export class OrderHistoryComponent implements OnInit {
 
   orders: Orders[];
   orderDetails: ProductDetails[] =[];
+  isShowDetails: boolean = false;
+  orderId;
+  imageWidth = 70;
+  imageMargin = 2;
+
   constructor(private orderService: OrdersService,
     private productService: ProductsService,
     private router: Router) { }
@@ -29,6 +34,7 @@ export class OrderHistoryComponent implements OnInit {
               ...item,
               productName: product.productName,
               pricePerKg: product.pricePerKg,
+              category: product.category,
               image: product.image
             });
             this.orderDetails.push(productDetail);
@@ -41,6 +47,17 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   onViewDetails(order: Orders){
+    if(order.orderId === this.orderId){
+      this.isShowDetails = false;
+      this.orderId = 0;
+    }else{
+      this.isShowDetails = true;
+      this.orderId = order.orderId;
+    }
+    
+  }
+
+  onViewInvoice(order){
     this.orderService.selectedOrderDetails = [];
     console.log(order);
     this.orderService.selectedOrder = order;
@@ -53,5 +70,4 @@ export class OrderHistoryComponent implements OnInit {
     this.orderService.isSelected = true;
     this.router.navigate(['bill']);
   }
-
 }

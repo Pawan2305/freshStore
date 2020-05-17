@@ -112,10 +112,12 @@
     </div>
     <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
         <button class="btn btn-outline-primary btn-block buttonAdd" [title]="addProductForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-        [disabled]="!addProductForm.valid">Add Product
+        [disabled]="!addProductForm.valid" data-dismiss="modal" (click)="addProduct()">Add Product
             <i class="fas fa-paper-plane-o ml-1"></i>
         </button>
     </div>
   </div>
 
 </form>
+
+<div id="snackbar" [class]="show">{{message}}</div>

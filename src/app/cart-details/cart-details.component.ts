@@ -15,6 +15,8 @@ export class CartDetailsComponent implements OnInit {
   products: CartProducts[] ;
   subTotal: number = 0;
   discount: number = 0;
+  show: string = '';
+  message: string;
   
   constructor(public productCartService: ProductsCartService,
     public loginService: LoginService,
@@ -64,9 +66,23 @@ export class CartDetailsComponent implements OnInit {
   onCheckout(){
     if(this.loginService.isUserLogin){
       this.productCartService.products = this.products;
-      this.router.navigate(['check-out']);  
+      if(this.products.length > 0){
+        console.log(this.products.length);
+        this.router.navigate(['check-out']); 
+      }else{
+        this.message = "There are no items in the cart. Please add items!";
+        this.show = 'show';
+        setTimeout(()=>{    
+          this.show = ' ';
+        }, 3000);
+      } 
     }else{
-      this.router.navigate(['login']);
+      this.message = "Please Login/SignUp!!";
+      this.show = 'show';
+      setTimeout(()=>{    
+        this.show = ' ';
+      }, 3000);
+      
     }
   }
 }

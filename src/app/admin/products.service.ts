@@ -14,6 +14,8 @@ export class ProductsService {
   product: Products[];
   orginalProduct: Products[];
   selectedProduct: SelectedProducts = new SelectedProducts();
+  isAdmin: boolean = true;
+  
                 
   constructor(private http: HttpClient) { }
 

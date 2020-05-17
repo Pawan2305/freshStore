@@ -14,9 +14,26 @@ export class CancelledOrderComponent implements OnInit {
 
   orders: Orders[];
 
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredOrders = this.listFilter ? this.performFilter(this.listFilter) : this.orders;
+  }
+
+  filteredOrders: Orders[] = [];
+
   constructor(private orderService: OrdersService,
     private loginService: LoginService,
     private router: Router) { }
+
+    performFilter(filterBy: string): Orders[] {
+      filterBy = filterBy.toLocaleLowerCase();
+      return this.orders.filter((order: Orders) =>
+        order.orderId.toString().toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
 
   ngOnInit(): void {
     this.orderService.getCancelledOrders().subscribe(res=>
@@ -33,7 +50,7 @@ export class CancelledOrderComponent implements OnInit {
             item.phone = user.phoneNo.toString();
           });
         });
-        
+        this.filteredOrders = this.orders;
       });
   }
 

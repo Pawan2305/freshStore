@@ -1,10 +1,3 @@
-body {
-    letter-spacing: 0.8px;
-    background: linear-gradient(0deg, #fff, 50%, #74a0ff);
-    background-repeat: no-repeat;
-    
-}
-
 .container-fluid {
     margin-top: 80px !important;
     margin-bottom: 80px !important;
@@ -37,10 +30,11 @@ p {
 
 .card {
     background-color: #fff;
-    box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
-    z-index: 0;
-    width: 90%;
-    height: 400px;
+    box-shadow: 0px 0px 0px 0px;
+    width: 80%;
+}
+.card-header{
+    background-color: white;
 }
 
 small {
@@ -50,26 +44,15 @@ small {
 .a {
     justify-content: space-between !important
 }
-
-.border-line {
-    border-right: 1px solid rgb(226, 206, 226)
+.first-footer{
+    background-color:#efecec;
+    height: 30%;
+    cursor: pointer;
 }
 
-.card-footer img {
-    opacity: 0.3
+.second-footer{
+    background-color:#efecec;
+    border-top: 0px;
 }
 
-.card-footer h5 {
-    font-size: 1.1em;
-    color: #8C9EFF;
-    cursor: pointer
-}
-
-.cart-item-product-thumb{
-    
-    width: 70px;
-    height: 70px;
-    border-radius: 100%;
-    
-  }
   

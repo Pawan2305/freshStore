@@ -1,5 +1,5 @@
 <div>
-    <button (click)="onBack()">Back</button>
+    <button class="btn" (click)="onRefresh()">Refresh</button>
 </div>
   
   <div class="wrapper-editor">
@@ -170,7 +170,7 @@
       
           </div>
           <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
-              <button class="btn btn-outline-primary btn-block buttonAdd" >Edit Product
+              <button class="btn btn-outline-primary btn-block buttonAdd" data-dismiss="modal" (click)="editProduct()" >Edit Product
                   <i class="fas fa-paper-plane-o ml-1"></i>
               </button>
           </div>
@@ -179,11 +179,3 @@
       </form>
     </div>
 </div>
-
-
-<button type="button" (click)="getImageFromService()">Get Image</button>
-
-<img [src]="imageToShow"
-     alt="Place image title"
-     [style.width.px]="imageWidth"
-     [style.margin.px]="imageMargin">

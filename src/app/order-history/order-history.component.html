@@ -1,228 +1,76 @@
 <div class="container-fluid my-5 d-sm-flex justify-content-center " *ngFor="let order of orders">
     <div class="card" >
-        <div class="card-header">
-            <div class="row justify-content-between ">
+        <div class="card-body ">
+            <!--div class="row justify-content-between ">
                 <div class="col">
                     <p class="text-muted"> Order ID <span class="font-weight-bold text-dark">{{order.orderId}}</span></p>
                     <p class="text-muted"> Placed On <span class="font-weight-bold text-dark">{{order.orderDate}}</span> </p>
                 </div>
                 <div class="flex-col my-auto">
-                    <h6 class="ml-auto mr-3"> <a (click)="onViewDetails(order)">View Details</a> </h6>
+                    <h6 class="ml-auto mr-3"> <a (click)="onViewInvoice(order)">View Invoice</a> </h6>
                 </div>
-            </div>
-        </div>
-        <div class="card-body" >          
-              <!-- Shopping Cart table -->
-              <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
-          
-                <table class="table table-responsive-md product-table">
-          
-                  <!-- Table head -->
-                  <thead class=" mdb-color lighten-5" >
-                    <tr>
-                      <th></th>
-                      <th class="font-weight-bold">
-                        <strong>Product</strong>
-                      </th>
-                      <th class="font-weight-bold">
-                        <strong>Color</strong>
-                      </th>
-                      <th></th>
-                      <th class="font-weight-bold">
-                        <strong>Price</strong>
-                      </th>
-                      <th class="font-weight-bold">
-                        <strong>QTY</strong>
-                      </th>
-                      <th class="font-weight-bold">
-                        <strong>Amount</strong>
-                      </th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <!-- /.Table head -->
-          
-                  <!-- Table body -->
-                  <tbody>
-          
-                    <!-- First row -->
-                    <tr *ngFor="let orderDetail of orderDetails">
-                        <td *ngIf = "orderDetail.orderId === order.orderId" style="text-align: center;">
-                          <img  [src]="orderDetail.image"
-                          [title]="orderDetail.productName"  class="cart-item-product-thumb">
-                        </td>
-                        <td *ngIf = "orderDetail.orderId === order.orderId">{{orderDetail.productName}}</td>
-                        <td *ngIf = "orderDetail.orderId === order.orderId" >White</td>
-                        <td *ngIf = "orderDetail.orderId === order.orderId"></td>                   
-                        <td *ngIf = "orderDetail.orderId === order.orderId">{{orderDetail.pricePerKg | currency:'INR':'symbol':'1.0-2' }}</td>
-                        <td *ngIf = "orderDetail.orderId === order.orderId">{{orderDetail.quantity}}</td>
-                        <td *ngIf = "orderDetail.orderId === order.orderId" class="font-weight-bold"><strong>{{orderDetail.price}}</strong></td>                   
-                    </tr>
-                    <!-- /.First row -->
-          
-
-          
-                  </tbody>
-                  <!-- /.Table body -->
-          
-                </table>
-          
+            </div-->
+            <div class="row card-text">
+              <div class="col-md-12 col-12">
+                <div ><strong> Order ID: {{order.orderId}} </strong></div>
+                <span>Amount: {{order.totalAmt}} &nbsp; </span>
+                <span>| &nbsp; Items: 2</span>
+                <span style="float: right;">{{order.orderDate}}</span>
               </div>
-              <!-- /.Shopping Cart table -->
-          
-        </div>
-      
-        <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0">
-            <div class="row text-center ">
-                <div class="col my-auto border-line ">
-                    <h5>Track</h5>
-                </div>
-                <div class="col my-auto border-line ">
-                    <h5>Cancel</h5>
-                </div>
-                <div class="col my-auto border-line ">
-                    <h5>Pre-pay</h5>
-                </div>
-                <div class="col my-auto mx-0 px-0 "><img class="img-fluid cursor-pointer" src="https://img.icons8.com/ios/50/000000/menu-2.png" width="30" height="30"></div>
             </div>
+            <div><hr></div>
+            <div class="row card-text" style="height: 75px;">
+              <div class="col-md-8 col-7">
+                <span>Order Status :</span>
+                <span>{{order.orderStatus}}</span>
+              </div>
+              <div class="col-md-4 col-5 text-right">
+                <a class="btn btn-primary btn-sm">Track</a>
+              </div>
+            </div>
+        </div>
+    
+      
+        <div class="card-footer first-footer" (click)="onViewDetails(order)">
+          <p>View Order Details</p>  
+        </div>
+        <div *ngIf="isShowDetails">
+          <div class="second-footer" *ngIf="order.orderId===orderId">
+            <div class="card-block">
+              <div *ngFor="let orderDetail of orderDetails">
+                <div *ngIf = "orderDetail.orderId === order.orderId" >
+                  <div class="prelative row" >
+                    <div class="col-md-2 col-sm-3 col-4">
+                      <div style="padding: 10px;">
+                        <img  [src]="orderDetail.image"
+                              [title]="orderDetail.productName" 
+                              class="cart-item-product-thumb"
+                              [style.width.px]="imageWidth"
+                              [style.margin.px]="imageMargin">
+                      </div>
+                    </div>
+                    <div class="col-md-10 col-sm-9 col-8">
+                      <div>Item: {{orderDetail.productName}}</div>
+                      <div>
+                        <span>Category: {{orderDetail.category}}
+                          <span class="separator">|</span>
+                        </span>
+                        Qty: {{orderDetail.quantity}}
+                        <span class="separator">|</span>
+                        {{orderDetail.price | currency:'INR':'symbol':'1.0-2' }}
+                      </div>
+
+                    </div>
+                  </div>
+                  <div><hr></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
     </div>   
 </div>   
 
-<!--div class="container-fluid my-5 d-sm-flex justify-content-center ">
-  <div class="card" >
-      <div class="card-header">
-          <div class="row justify-content-between ">
-              <div class="col">
-                  <p class="text-muted"> Order ID <span class="font-weight-bold text-dark">1222528743</span></p>
-                  <p class="text-muted"> Place On <span class="font-weight-bold text-dark">12,March 2019</span> </p>
-              </div>
-              <div class="flex-col my-auto">
-                  <h6 class="ml-auto mr-3"> <a href="#">View Details</a> </h6>
-              </div>
-          </div>
-      </div>
-      <div class="card-body">          
-          
-            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
-        
-              <table class="table table-responsive-md product-table">
-        
-             
-                <thead class=" mdb-color lighten-5" >
-                  <tr>
-                    <th></th>
-                    <th class="font-weight-bold">
-                      <strong>Product</strong>
-                    </th>
-                    <th class="font-weight-bold">
-                      <strong>Color</strong>
-                    </th>
-                    <th></th>
-                    <th class="font-weight-bold">
-                      <strong>Price</strong>
-                    </th>
-                    <th class="font-weight-bold">
-                      <strong>QTY</strong>
-                    </th>
-                    <th class="font-weight-bold">
-                      <strong>Amount</strong>
-                    </th>
-                    <th></th>
-                  </tr>
-                </thead>
-               
-                <tbody>
-        
-                  
-                  <tr>
-                    <td style="text-align: center;">
-                      <img src="assets/apple.jpg" alt="" class="cart-item-product-thumb">
-                    </td>
-                    <td>
-                     
-                      Apple
-                    </td>
-                    <td>White</td>
-                    <td></td>
-                    <td>$800</td>
-                    <td>
-                     2
-                    </td>
-                    <td class="font-weight-bold">
-                      <strong>$800</strong>
-                    </td>
-                   
-                  </tr>
-                 
-                  <tr>
-                    <td style="text-align: center;">
-                      <img src="assets/apple.jpg" alt="" class="cart-item-product-thumb">
-                    </td>
-                    <td>
-                     Sony
-                    </td>
-                    <td>Red</td>
-                    <td></td>
-                    <td>$200</td>
-                    <td>
-                      2
-                    </td>
-                    <td class="font-weight-bold">
-                      <strong>$600</strong>
-                    </td>
-                   
-                  </tr>
-                 
-                  <tr>
-                    <td style="text-align: center;">
-                      <img src="assets/apple.jpg" alt="" class="cart-item-product-thumb">
-                    </td>
-                    <td>
-                      Apple
-                    </td>
-                    <td>Gold</td>
-                    <td></td>
-                    <td>$600</td>
-                    <td>
-                      2
-                    </td>
-                    <td class="font-weight-bold">
-                      <strong>$1200</strong>
-                    </td>
-                    
-                  </tr>
-                  
-        
-
-        
-                </tbody>
-               
-        
-              </table>
-        
-            </div>
-            
-        
-      </div>
-    
-      <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0">
-          <div class="row text-center ">
-              <div class="col my-auto border-line ">
-                  <h5>Track</h5>
-              </div>
-              <div class="col my-auto border-line ">
-                  <h5>Cancel</h5>
-              </div>
-              <div class="col my-auto border-line ">
-                  <h5>Pre-pay</h5>
-              </div>
-              <div class="col my-auto mx-0 px-0 "><img class="img-fluid cursor-pointer" src="https://img.icons8.com/ios/50/000000/menu-2.png" width="30" height="30"></div>
-          </div>
-      </div>
-  </div>
 
   
-  
-</div-->   
-
+ 

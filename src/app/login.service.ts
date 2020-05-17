@@ -17,6 +17,8 @@ export class LoginService {
   public isLogin: boolean = true;
   public useremail: string;
   public category: string = "";
+
+  isShowSideBar:boolean = true;
                 
   constructor(private http: HttpClient) { }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/login.service';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -10,7 +11,8 @@ import { LoginService } from 'src/app/login.service';
 export class AdminNavbarComponent implements OnInit {
 
   constructor( private router: Router,
-    public loginService: LoginService) { }
+    public loginService: LoginService,
+    private productService: ProductsService) { }
 
   ngOnInit(): void {
   }
@@ -19,10 +21,15 @@ export class AdminNavbarComponent implements OnInit {
     this.router.navigate(['admin/live-orders']);
   }
 
+  sideBarToggle(){
+    this.loginService.isShowSideBar = !this.loginService.isShowSideBar;
+  }
+
   onLogout(){
     this.loginService.isUserLogin = false;
     this.loginService.username = null;
-   
+    this.productService.isAdmin = false;
+  
     this.router.navigate(['/home', 'store']);
   }
 

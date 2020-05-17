@@ -35,7 +35,12 @@ export class MainPageBodyComponent implements OnInit {
     private productCartService: ProductsCartService) { }
 
   ngOnInit(): void {
-
+    console.log("Inside Main page ngOninit");
+    console.log(this.productService.isAdmin);
+    if(!this.productService.isAdmin){
+      console.log("Admin logout");
+      window.location.reload();
+    }
     
     this.productService.getAllProducts().subscribe(
       (res: Products[]) =>{

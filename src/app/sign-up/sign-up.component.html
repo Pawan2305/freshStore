@@ -90,15 +90,12 @@
     <div class="text-center form-sm mt-2">
       <button class="btn btn-info"
       [title]="signupForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-      [disabled]="!signupForm.valid">Sign up <i class="fas fa-sign-in ml-1"></i></button>
+      [disabled]="!signupForm.valid" data-dismiss="modal" (click)="save()">Sign up <i class="fas fa-sign-in ml-1"></i></button>
     </div>
 
   </div>
   <!--Footer-->
   <div class="modal-footer">
-    <div class="options text-right">
-      <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
-    </div>
     <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
   </div>
 </form>

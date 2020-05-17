@@ -55,6 +55,7 @@
                         <th class="text-center" width="10%">RATE</th>
                         <th class="text-center" width="10%">QTY</th>
                         <th class="text-right" width="20%">TOTAL</th>
+                        <th class="text-right" width = 20%>DISCOUNT</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -66,6 +67,7 @@
                         <td class="text-center">{{product.quantity}}kg</td>
                         <td class="text-right" *ngIf= "!orderService.isSelected">{{product.totalPrice | currency:'INR':'symbol':'1.0-2'}}</td>
                         <td class="text-right" *ngIf= "orderService.isSelected">{{product.price | currency:'INR':'symbol':'1.0-2'}}</td>
+                        <td class="text-right" *ngIf= "!orderService.isSelected">{{product.discount | currency:'INR':'symbol':'1.0-2'}}</td>
                      </tr>
                   </tbody>
                </table>
