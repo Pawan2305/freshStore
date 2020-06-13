@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class OrderHistoryComponent implements OnInit {
 
-  orders: Orders[];
+  orders: OrderItems[];
   orderDetails: ProductDetails[] =[];
   isShowDetails: boolean = false;
   orderId;
@@ -27,8 +27,10 @@ export class OrderHistoryComponent implements OnInit {
       this.orders = res;
       console.log(this.orders);
       this.orders.forEach(element =>{
+        let count = 0;
         this.orderService.getOrderDetails(element.orderId).subscribe(res =>{
           res.forEach(item => {
+            count = count +1;
             let product = this.productService.product.find(p => p.productId === item.productId)
             const productDetail: ProductDetails=({
               ...item,
@@ -39,7 +41,9 @@ export class OrderHistoryComponent implements OnInit {
             });
             this.orderDetails.push(productDetail);
           });
+          element.items = count;
         });
+
       });
       console.log(this.orderDetails);
     });
@@ -53,8 +57,12 @@ export class OrderHistoryComponent implements OnInit {
     }else{
       this.isShowDetails = true;
       this.orderId = order.orderId;
-    }
-    
+    }  
+  }
+
+  onTrack(orderId){
+    this.orderService.trackOrderId = orderId;
+    this.router.navigate(['track-order']);
   }
 
   onViewInvoice(order){
@@ -70,4 +78,8 @@ export class OrderHistoryComponent implements OnInit {
     this.orderService.isSelected = true;
     this.router.navigate(['bill']);
   }
+}
+
+export interface OrderItems extends Orders{
+  items?: number;
 }

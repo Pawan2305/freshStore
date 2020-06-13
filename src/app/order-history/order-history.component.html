@@ -1,31 +1,36 @@
 <div class="container-fluid my-5 d-sm-flex justify-content-center " *ngFor="let order of orders">
     <div class="card" >
         <div class="card-body ">
-            <!--div class="row justify-content-between ">
-                <div class="col">
-                    <p class="text-muted"> Order ID <span class="font-weight-bold text-dark">{{order.orderId}}</span></p>
-                    <p class="text-muted"> Placed On <span class="font-weight-bold text-dark">{{order.orderDate}}</span> </p>
-                </div>
-                <div class="flex-col my-auto">
-                    <h6 class="ml-auto mr-3"> <a (click)="onViewInvoice(order)">View Invoice</a> </h6>
-                </div>
-            </div-->
             <div class="row card-text">
               <div class="col-md-12 col-12">
                 <div ><strong> Order ID: {{order.orderId}} </strong></div>
-                <span>Amount: {{order.totalAmt}} &nbsp; </span>
-                <span>| &nbsp; Items: 2</span>
-                <span style="float: right;">{{order.orderDate}}</span>
+                <span>Amount : {{order.totalAmt}} &nbsp; </span>
+                <span>| &nbsp; Items : {{order.items}}</span>
+                <span style="float: right;">Order Date : {{order.orderDate}}</span>
               </div>
             </div>
             <div><hr></div>
             <div class="row card-text" style="height: 75px;">
               <div class="col-md-8 col-7">
-                <span>Order Status :</span>
+                <span>Order Status : </span>
                 <span>{{order.orderStatus}}</span>
+                <span> &nbsp; | &nbsp; Date : </span>
+                <ng-container *ngIf = "order.orderStatus === 'Placed'">
+                  <span>{{order.orderDate}}</span>
+                </ng-container>
+                <ng-container *ngIf = "order.orderStatus === 'Shipped'">
+                  <span>{{order.shipDate}}</span>
+                </ng-container>
+                <ng-container *ngIf = "order.orderStatus === 'Delivered'">
+                  <span>{{order.deliveryDate}}</span>
+                </ng-container>
+                <ng-container *ngIf = "order.orderStatus === 'Cancelled'">
+                  <span>{{order.cancelDate}}</span>
+                </ng-container>
               </div>
               <div class="col-md-4 col-5 text-right">
-                <a class="btn btn-primary btn-sm">Track</a>
+                <button class="btn btn-primary btn-sm" (click)="onViewInvoice(order)"> View Invoice</button>
+                <button class="btn btn-primary btn-sm" (click)="onTrack(order.orderId)">Track</button>
               </div>
             </div>
         </div>
