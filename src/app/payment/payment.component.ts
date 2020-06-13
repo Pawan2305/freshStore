@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit {
 
   onPaymentMethod($event){
     console.log($event);
-    if( $event === "cash"){
+    if( $event === "Cash"){
       this.paymentMethod = "Cash On Delivery";
       this.isPaymentMethodSelected = true;
     }else{
