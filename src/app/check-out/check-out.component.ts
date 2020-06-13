@@ -117,7 +117,7 @@ export class CheckOutComponent implements OnInit {
 
   deliveryType($event){
     this.total = this.total - this.deliveryCharge;
-    if($event === "fast"){
+    if($event === "Fast"){
       this.dType = "Fast";
       this.deliveryCharge = 100;   
     }else{
