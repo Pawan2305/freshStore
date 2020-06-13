@@ -51,13 +51,17 @@
   <!-- Collapsible content -->
 
   <!-- Navbar brand -->
-  <p>Why You Choose Online Mandi : High Quality | Fresh Fruits & Vegetables | Lowest Price | Free shipping above Rs. 300 | One Day Return policy.</p>
+  <p style="font-size: 16px; font-weight: 400;">Why You Choose Online Mandi : High Quality | Fresh Fruits & Vegetables | Lowest Price | Free shipping above Rs. 300 | One Day Return policy.</p>
 
 </nav>
 <!--/.Navbar-->
-<button class="btn" (click)="onAll()">All</button>
-<button class="btn" (click)="onFruit()">Fruits</button>
-<button class="btn" (click)="onVegetable()">Vegetables</button>
+<div style="position: relative; left: 40%;">
+  <button class="btn btn-primary btn-rounded" (click)="onAll()">All</button>
+  <button class="btn btn-outline-primary btn-rounded waves-effect" (click)="onFruit()">Fruits</button>
+  <button class="btn btn-outline-primary btn-rounded waves-effect" (click)="onVegetable()">Vegetables</button>
+</div>
+
+
 
 <div class="container mt-5">
   <!--Section: Content-->
