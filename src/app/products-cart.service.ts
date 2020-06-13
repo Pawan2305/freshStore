@@ -17,6 +17,7 @@ export class ProductsCartService {
   baseUrl = "http://localhost/api";
 
   products:CartProducts[] = [];
+  total = 0;
   subTotal = 0;
   exists: boolean = false;
   discount: number = 0;
@@ -131,6 +132,7 @@ export class ProductsCartService {
             this.products.push(item);
             this.subTotal = this.subTotal + item.totalPrice;
             this.discount = this.discount + item.totalDiscount;
+            this.total = this.discount + this.subTotal;
           });
         }); 
       });

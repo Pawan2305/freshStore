@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class CartDetailsComponent implements OnInit {
 
   products: CartProducts[] ;
+  total: number = 0;
   subTotal: number = 0;
   discount: number = 0;
   show: string = '';
@@ -28,6 +29,7 @@ export class CartDetailsComponent implements OnInit {
     //console.log(this.subTotal);
 
     this.products.forEach(element =>{
+      this.total = this.total + (element.totalPrice + element.totalDiscount);
       this.subTotal = this.subTotal + element.totalPrice;
       this.discount = this.discount + element.totalDiscount;
     });
@@ -39,6 +41,7 @@ export class CartDetailsComponent implements OnInit {
     this.products=this.productCartService.deleteItems(product);
     this.productCartService.subTotal = this.productCartService.subTotal - product.totalPrice;
     this.productCartService.discount = this.productCartService.discount - product.totalDiscount;
+    this.productCartService.total = this.productCartService.subTotal +this.productCartService.discount;
   }
 
   onQuantity(product:CartProducts, $event){
@@ -59,6 +62,7 @@ export class CartDetailsComponent implements OnInit {
     this.products.forEach(element =>{
       this.productCartService.subTotal = this.productCartService.subTotal + element.totalPrice;
       this.productCartService.discount = this.productCartService.discount + element.totalDiscount;
+      this.productCartService.total = this.productCartService.subTotal +this.productCartService.discount;
     });
     
   }
