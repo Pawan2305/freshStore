@@ -54,12 +54,25 @@
   <p style="font-size: 16px; font-weight: 400;">Why You Choose Online Mandi : High Quality | Fresh Fruits & Vegetables | Lowest Price | Free shipping above Rs. 300 | One Day Return policy.</p>
 
 </nav>
-<!--/.Navbar-->
-<div style="position: relative; left: 40%;">
-  <button class="btn btn-primary btn-rounded" (click)="onAll()">All</button>
-  <button class="btn btn-outline-primary btn-rounded waves-effect" (click)="onFruit()">Fruits</button>
-  <button class="btn btn-outline-primary btn-rounded waves-effect" (click)="onVegetable()">Vegetables</button>
+
+
+
+<div style="position: relative; margin-left: 40%;">
+  <label for="f-option" class="l-radio">
+    <input type="radio" id="f-option" name="selector" tabindex="1" (click)="onAll()">
+    <span>All</span>
+  </label>
+  <label for="s-option" class="l-radio">
+    <input type="radio" id="s-option" name="selector" tabindex="2" (click)="onFruit()">
+    <span>Fruits</span>
+  </label>
+    <label for="t-option" class="l-radio">
+    <input type="radio" id="t-option" name="selector" tabindex="3" (click)="onVegetable()">
+    <span>Vegetables</span>
+  </label>
 </div>
+
+
 
 
 
