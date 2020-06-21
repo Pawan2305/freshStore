@@ -15,7 +15,8 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
+
+                        <div class="sb-sidenav-menu-heading"></div>
                         <a class="nav-link" [routerLink]="['/admin/admin-dashboard']">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
@@ -46,31 +47,19 @@
                             <div class="sb-nav-link-icon" ><i class="fas fa-chart-area"></i></div>
                             Sales Summary
                         </a>
-      
-      
-      
-      
-      
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Graphs
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Cards
-                        </a>
+    
       
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    ADMIN
                 </div>
             </nav>
         </div>
-      
-    <router-outlet width="100%"></router-outlet>
+        <div [style.padding-left.px]="loginService.padding" [style.width.px]="loginService.layoutWidth">
+            <router-outlet width="100%"></router-outlet>
+        </div>
     </div>
     <app-footer></app-footer>
 </div>

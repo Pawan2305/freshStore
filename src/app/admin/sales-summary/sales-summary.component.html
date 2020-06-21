@@ -3,14 +3,13 @@
 </div>
 
 <div>
-  <button (click)="onBack()" class="btn">Back</button>
   <button class="btn" style="float: right;" (click)="showGraph()"> {{showGraphFlag ? "See Table" : "See Graph"}}</button>
 </div>
-<div class="row">
-  <form class="form-inline mr-auto">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search Product" aria-label="Search">
-    <i class="fas fa-search input-prefix" aria-hidden="true"></i>  
-  </form>
+<div class="row" style="width: 100%;">
+  <div class="form-inline mr-auto" style="padding-left: 20px;">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search Product..." aria-label="Search" [(ngModel)]="listFilter">
+    <i class="fas fa-search" aria-hidden="true"></i>
+  </div>
 
   <form class="form-inline mr-5" (ngSubmit)="getOrders()" [formGroup]="rangeForm">
     <label> Enter start and end date: 
@@ -35,7 +34,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products; let i = index">
+      <tr *ngFor="let product of filteredProducts; let i = index">
         <td>{{i+1}}</td>
         <td>{{product.productName}}</td>
         <td>{{product.category}}</td>

@@ -23,6 +23,13 @@ export class AdminNavbarComponent implements OnInit {
 
   sideBarToggle(){
     this.loginService.isShowSideBar = !this.loginService.isShowSideBar;
+    if(this.loginService.isShowSideBar === false){
+      this.loginService.padding = 50;
+      this.loginService.layoutWidth = 1300
+    }else{
+      this.loginService.padding =0;
+      this.loginService.layoutWidth = 1135
+    }
   }
 
   onLogout(){

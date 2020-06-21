@@ -19,6 +19,8 @@ export class LoginService {
   public category: string = "";
 
   isShowSideBar:boolean = true;
+  padding = 0;
+  layoutWidth = 1135;
                 
   constructor(private http: HttpClient) { }
 

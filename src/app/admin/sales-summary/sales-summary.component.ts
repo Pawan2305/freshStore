@@ -22,10 +22,29 @@ export class SalesSummaryComponent implements OnInit {
   totalSale: number = 0;
   showGraphFlag: boolean = false;
 
+  
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
+
+  filteredProducts: TotalProducts[] = [];
+
+
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private productService: ProductsService,
     private orderService: OrdersService) { }
+
+    performFilter(filterBy: string): TotalProducts[] {
+      filterBy = filterBy.toLocaleLowerCase();
+      return this.products.filter((product: TotalProducts) =>
+        product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
 
   ngOnInit(): void {
 
@@ -46,15 +65,11 @@ export class SalesSummaryComponent implements OnInit {
         totalQtySale: qtySale,
         totalEarnings: totalAmt
       }
-    });
-
-    
+    });  
+    this.filteredProducts = this.products;
     this.products = this.products.filter(item => item.totalQtySale !== 0);
    
-    console.log(this.products);
-
-   
-    
+    console.log(this.products);  
   }
 
   onBack(){
