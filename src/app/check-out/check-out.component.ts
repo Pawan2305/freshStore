@@ -17,7 +17,7 @@ import { PaymentService } from '../payment.service';
 })
 export class CheckOutComponent implements OnInit {
 
-  addAddressForm:FormGroup;
+  addAddressForm: FormGroup;
   products: CartProducts[];
   address: Address[] = [];
   total: number = 0;
@@ -25,6 +25,8 @@ export class CheckOutComponent implements OnInit {
   anotherAddress = false;
   dType = 'Standard';
   deliveryCharge = 50;
+  isDisabled = false;
+  isDeliveryTypeSet = false;
   isAddressSelected = false;
   discount: number = 0;
 
@@ -37,10 +39,6 @@ export class CheckOutComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /*if(!this.loginService.isUserLogin){
-      this.router.navigate(['main-page']);
-    }*/
-
     this.addAddressForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
@@ -51,41 +49,41 @@ export class CheckOutComponent implements OnInit {
       mobileNo: [''],
       zip: null
     });
-    const email: Login ={
+    const email: Login = {
       loginId: this.loginService.customerId,
       pswd: ""
     }
 
-    this.addressService.getAddress(email).subscribe(res=>{
-        console.log(res);
-        this.address = res;
+    this.addressService.getAddress(email).subscribe(res => {
+      console.log(res);
+      this.address = res;
     });
 
     this.total = this.productCartService.subTotal;
-    
+
     this.products = this.productCartService.products;
-   
-    this.products.forEach(element =>{
-      this.totalItem = this.totalItem+1;
+
+    this.products.forEach(element => {
+      this.totalItem = this.totalItem + 1;
     });
-    this.total = this.total+ this.deliveryCharge;
+    this.total = this.total + this.deliveryCharge;
   }
 
-  addAnotherAddress(){
-    if(!this.anotherAddress){
+  addAnotherAddress() {
+    if (!this.anotherAddress) {
       this.anotherAddress = true;
-    }else{
+    } else {
       this.anotherAddress = false;
     }
-   
+
   }
 
-  addAddress(){
+  addAddress() {
     console.log(this.addAddressForm.value);
     let address: Address = {
       customerEmail: this.loginService.customerId,
       firstName: this.addAddressForm.get('firstName').value,
-      lastName:this.addAddressForm.get('lastName').value,
+      lastName: this.addAddressForm.get('lastName').value,
       address1: this.addAddressForm.get('address1').value,
       address2: this.addAddressForm.get('address2').value,
       city: this.addAddressForm.get('city').value,
@@ -94,33 +92,33 @@ export class CheckOutComponent implements OnInit {
       zipCode: this.addAddressForm.get('zip').value,
       addressId: 0
     }
-    this.addressService.addAddress(address).subscribe((res)=>{
-      if(res=== true){
+    this.addressService.addAddress(address).subscribe((res) => {
+      if (res === true) {
         //window.alert("Product Added");
         this.addAddressForm.reset();
-        const email: Login ={
+        const email: Login = {
           loginId: this.loginService.customerId,
           pswd: ""
         }
-        
-        this.addressService.getAddress(email).subscribe(res=>{
+
+        this.addressService.getAddress(email).subscribe(res => {
           console.log(res);
           this.address = res;
         });
-        
+
         console.log(address);
-      }else{
+      } else {
         console.log("Unable to add data");
       }
     });
   }
 
-  deliveryType($event){
+  deliveryType($event) {
     this.total = this.total - this.deliveryCharge;
-    if($event === "Fast"){
+    if ($event === "Fast") {
       this.dType = "Fast";
-      this.deliveryCharge = 100;   
-    }else{
+      this.deliveryCharge = 100;
+    } else {
       this.dType = "Standard";
       this.deliveryCharge = 50;
     }
@@ -128,30 +126,36 @@ export class CheckOutComponent implements OnInit {
     this.total = this.total + this.deliveryCharge;
     this.paymentService.deliveryCharges = this.deliveryCharge;
     this.paymentService.total = this.total;
+    this.isDeliveryTypeSet = true;
+    if(this.isDeliveryTypeSet && this.isAddressSelected){
+      this.isDisabled = true;
+    }
   }
 
-  onDeleteAddress(address: Address){
+  onDeleteAddress(address: Address) {
     this.addressService.deleteAddress(address.addressId).subscribe(
-      res =>{
-        if(res){
-          const email: Login ={
+      res => {
+        if (res) {
+          const email: Login = {
             loginId: this.loginService.customerId,
             pswd: ""
           }
-          this.addressService.getAddress(email).subscribe(res=>{
+          this.addressService.getAddress(email).subscribe(res => {
             console.log(res);
             this.address = res;
-          });  
-        }else{
+          });
+        } else {
           console.log("Something is wrong");
         }
       }
     );
   }
 
-  selectedAddress(address: Address){
+  selectedAddress(address: Address) {
     this.addressService.deliveryAddress = address;
     this.isAddressSelected = true;
+    if(this.isDeliveryTypeSet && this.isAddressSelected){
+      this.isDisabled = true;
+    }
   }
-
 }
