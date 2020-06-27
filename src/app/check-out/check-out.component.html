@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h5 class="card-header info-color white-text text-center py-3">
+  <h5 class="card-header white-text text-center py-3" style="background-color: #74b9e7 ;">
     <strong>Delivery Address</strong>
   </h5>
 
@@ -38,13 +38,13 @@
           </div>
           <span class="text-success">-{{this.productCartService.discount | currency:'INR':'symbol':'1.0-2' }}</span>
         </li>
-        <li class="list-group-item d-flex justify-content-between info-color">
-          <span>Total (USD)</span>
+        <li class="list-group-item d-flex justify-content-between " style="background-color: #2874A6; color: white;">
+          <span>Total (INR)</span>
           <strong>{{total | currency:'INR':'symbol':'1.0-2' }}</strong>
         </li>
       </ul>
 
-      <button class="btn btn-info btn-lg btn-block" [disabled]="!isAddressSelected" [routerLink]="['/payment']" type="submit">Continue to checkout</button>
+      <button class="btn  btn-lg btn-block" style="background-color: #2874A6; color: white;" [disabled]="!isAddressSelected" [routerLink]="['/payment']" type="submit">Continue to checkout</button>
     </div>
     <div class="col-md-8 order-md-1" style="padding-bottom: 50px;">
       <div class="container py-3 my-3">
@@ -93,7 +93,7 @@
 
           </div>
           <div style="padding-top: 40px;" >
-          <button class="btn btn-outline-indigo btn-md" (click)="addAnotherAddress()" >Add another Address</button>
+          <button class="btn btn-md" style="border-color: #2874A6 ;" (click)="addAnotherAddress()" >Add another Address</button>
         </div>
         </section>
       </div>
@@ -152,9 +152,9 @@
             </div>
     
             <div class="row">
-              <div class="col-md-5 md-form md-outline mb-3">
+              <div class="col-md-5 md-form md-outline mb-0 mt-2">
                   <input type="text" class="form-control" formControlName="city"  required>
-                  <label for="city">City</label>
+                  <label for="city" style="left:20px;">City</label>
                 <div class="invalid-feedback">
                   Please select a valid country.
                 </div>
@@ -162,7 +162,10 @@
               <div class="col-md-4 mb-3">
                 <select class="custom-select d-block w-100 mt-2" formControlName="state"  required>
                   <option value="">State</option>
-                  <option>California</option>
+                  <option>Delhi</option>
+                  <option>Haryana</option>
+                  <option>UP</option>
+                  <option>Punjab</option>
                 </select>
                 <div class="invalid-feedback">
                   Please provide a valid state.
@@ -179,7 +182,7 @@
               </div>
             </div>
             
-            <button class="btn btn-info btn-lg btn-block" type="submit">Add</button>
+            <button class="btn  btn-lg btn-block" style="background-color: #2874A6 ; color: white;" type="submit">Add</button>
           </form>
         </div>
       </div>

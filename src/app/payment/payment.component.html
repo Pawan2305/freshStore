@@ -53,19 +53,19 @@
                             
                         </div>
 
-                        <h3 class="font-weight-bold">Discount : {{this.productCartService.discount | currency:'INR':'symbol':'1.0-2' }} </h3>
+                        <h4 style="font-weight: normal; padding-left: 20px;">Discount : {{this.productCartService.discount | currency:'INR':'symbol':'1.0-2' }} </h4>
                         <div class="card mt-3 border-0 first-card"></div>
 
-                        <h3 class="font-weight-bold">Delivery Charges : {{deliveryCharge | currency:'INR':'symbol':'1.0-2' }}</h3>
+                        <h4 style="font-weight: normal; padding-left: 20px;">Delivery Charges : {{deliveryCharge | currency:'INR':'symbol':'1.0-2' }}</h4>
                         <div class="card mt-3 border-0 first-card"></div>
 
-                        <h3 class="font-weight-bold">Total Amount : {{total | currency:'INR':'symbol':'1.0-2' }}</h3>
+                        <h4 style="font-weight: normal; padding-left: 20px;">Total Amount : {{total | currency:'INR':'symbol':'1.0-2' }}</h4>
                         <div class="card mt-3 border-0 first-card"></div>
 
                         <div class="card-body">
                             <p class="card-text">Perfect Software Solution is a <span class="text-primary">professional software, website development</span> timely delivered and cost effective software,<span class="text-primary"> website development services</span>. We are highly experienced in offering offshore software development.</p>
                             
-                        <div class="card-footer"> <button type="submit" class="btn btn-primary btn-lg" [disabled]="!isPaymentMethodSelected" (click)="onPay()" >PAY</button> </div>
+                        <div class="card-footer"> <button type="submit" class="btn  btn-lg" style="background-color: #2874A6; color: white; font-weight: normal;" [disabled]="!isPaymentMethodSelected" (click)="onPay()" >PAY</button> </div>
                     </div>
                     
                     

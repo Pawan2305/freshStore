@@ -29,14 +29,14 @@
                 </ng-container>
               </div>
               <div class="col-md-4 col-5 text-right">
-                <button class="btn btn-primary btn-sm" (click)="onViewInvoice(order)"> View Invoice</button>
-                <button class="btn btn-primary btn-sm" (click)="onTrack(order.orderId)">Track</button>
+                <button class="btn btn-sm" style="background-color: #2874A6; color: white;" (click)="onViewInvoice(order)"> View Invoice</button>
+                <button class="btn btn-sm" style="background-color: #2874A6; color: white;" (click)="onTrack(order.orderId)">Track</button>
               </div>
             </div>
         </div>
     
       
-        <div class="card-footer first-footer" (click)="onViewDetails(order)">
+        <div class="card-footer first-footer" style="background-color: #2874A6; color: white;" (click)="onViewDetails(order)">
           <p>View Order Details</p>  
         </div>
         <div *ngIf="isShowDetails">

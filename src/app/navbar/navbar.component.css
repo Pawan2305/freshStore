@@ -1,4 +1,14 @@
 .nav-link{
     margin-left: 30px;
+    color: white;
 }
 
+.dropdown-item:hover{
+    background-color: #5dabdf ;
+
+}
+
+.nav-link:active{
+    color: black;
+
+}

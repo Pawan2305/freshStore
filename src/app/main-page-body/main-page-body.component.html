@@ -6,24 +6,24 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="assets/photo1.jpg" class="d-block w-100" alt="..." height="400">
+        <img src="assets/image1.jpg" class="d-block w-100" alt="..." height="400">
         <div class="carousel-caption d-none d-md-block">
           <h5>First slide label</h5>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="assets/photo2.jpg" class="d-block w-100" alt="..." height="400">
+        <img src="assets/image2.jpg" class="d-block w-100" alt="..." height="400">
         <div class="carousel-caption d-none d-md-block">
           <h5>Second slide label</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="assets/photo3.jpg" class="d-block w-100" alt="..." height="400">
+        <img src="assets/image3.jpg" class="d-block w-100" alt="..." height="400">
         <div class="carousel-caption d-none d-md-block">
           <h5>Third slide label</h5>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <p>Love is a fruit in season at all times, and within reach of every hand.</p>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
 </div>
 
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark blue lighten-2 mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark  mb-4" style="background-color: #2874A6 ;">
 
   <!-- Collapsible content -->
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -51,7 +51,7 @@
   <!-- Collapsible content -->
 
   <!-- Navbar brand -->
-  <p style="font-size: 16px; font-weight: 400;">Why You Choose Online Mandi : High Quality | Fresh Fruits & Vegetables | Lowest Price | Free shipping above Rs. 300 | One Day Return policy.</p>
+  <p style="font-size: 16px; font-weight: 400; color: white;">Why You Choose Online Mandi : High Quality | Fresh Fruits & Vegetables | Lowest Price | Free shipping above Rs. 300 | One Day Return policy.</p>
 
 </nav>
 
@@ -59,7 +59,7 @@
 
 <div style="position: relative; margin-left: 40%;">
   <label for="f-option" class="l-radio">
-    <input type="radio" id="f-option" name="selector" tabindex="1" (click)="onAll()">
+    <input type="radio" id="f-option" name="selector" tabindex="1" (click)="onAll()" checked>
     <span>All</span>
   </label>
   <label for="s-option" class="l-radio">
@@ -115,7 +115,7 @@
               </del>
             </div>  
 
-            <h5 class="font-weight-bold blue-text mb-0">
+            <h5 class="font-weight-bold  mb-0" style="color: #2874A6 ;" >
               <strong>{{product.pricePerKg | currency:'INR':'symbol':'1.0-2' }}<span class="period">/kg</span></strong>
             </h5>
 
@@ -127,7 +127,7 @@
             <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
           </div-->
 
-          <button type="button" class="btn btn-light-blue btn-block btn-lg" (click)="addToCart(product)">Add To Cart</button>
+          <button type="button" class="btn  btn-block btn-lg" style="background-color: #2874A6 ; color: white;" (click)="addToCart(product)">Add To Cart</button>
           <!-- Card content -->
         </div>
         <!-- Card -->

@@ -2,8 +2,8 @@
 <!--Body-->
   <div class="modal-body">
     <div class="md-form form-sm mb-3">
-      <i class="fas fa-user prefix"></i>
-      <input type="email" id="nameId" class="form-control form-control-sm validate"
+      <i class="fas fa-user prefix" style="color: #2874A6;"></i>
+      <input type="text" id="nameId" class="form-control form-control-sm validate"
         placeholder="Your Name"
         formControlName="name" 
         required
@@ -22,7 +22,7 @@
 
     
     <div class="md-form form-sm mb-3">
-      <i class="fas fa-mobile-alt prefix"></i>
+      <i class="fas fa-mobile-alt prefix" style="color: #2874A6;"></i>
       <input  class="form-control validate" 
         id="phoneNoId"
         type="text"
@@ -42,7 +42,7 @@
     </div>
 
     <div class="md-form form-sm mb-3">
-      <i class="fas fa-envelope prefix"></i>
+      <i class="fas fa-envelope prefix" style="color: #2874A6;"></i>
       <input class="form-control validate" 
         id="emailId"
         type="email"
@@ -62,7 +62,7 @@
     </div>
 
     <div class="md-form form-sm mb-3">
-      <i class="fas fa-lock prefix"></i>
+      <i class="fas fa-lock prefix" style="color: #2874A6;"></i>
       <input type="password" id="passwordId" class="form-control form-control-sm validate"
         formControlName ="password"
         placeholder="Your Password"
@@ -75,7 +75,7 @@
     </div>
 
     <div class="md-form form-sm mb-3">
-      <i class="fas fa-lock prefix"></i>
+      <i class="fas fa-lock prefix" style="color: #2874A6;"></i>
       <input type="password" id="confirmPasswordId" class="form-control form-control-sm validate"
         formControlName ="confirmPassword"
         placeholder="Your Password"
@@ -88,9 +88,9 @@
     </div>
 
     <div class="text-center form-sm mt-2">
-      <button class="btn btn-info"
+      <button class="btn" style="background-color: #2874A6; color: white;"
       [title]="signupForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-      [disabled]="!signupForm.valid" data-dismiss="modal" (click)="save()">Sign up <i class="fas fa-sign-in ml-1"></i></button>
+      [disabled]="!signupForm.valid" data-dismiss="modal" (click)="save()"> <i class="fas fa-sign-in-alt"> </i> Sign up </button>
     </div>
 
   </div>

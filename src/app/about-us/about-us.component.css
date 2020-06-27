@@ -1,6 +1,6 @@
 .about{
 	cursor: pointer;
-	background-color: #6B062D;
+	background-color: #91ccf3;
 	color: #FFFFFF;
 	padding-top: 20px;
 	padding-bottom: 30px;
@@ -22,8 +22,8 @@
 	font-size: 40px;
 	color: #FFFFFF;
 	opacity: 0.7;
-	background-color: #4C0822;
-	border: 2px solid #4C0822;
+	background-color: #2874A6;
+	border: 2px solid white;
 
 	-webkit-transition:all .5s ease;
  	-o-transition:all .5s ease;
@@ -33,7 +33,7 @@
 }
 .about-item:hover span{
 	opacity: 1;	
-	border: 2px solid #CC0039;
+	border: 2px solid #044570;
 	font-size: 42px;
 	-webkit-transform: scale(1.1,1.1) rotate(360deg) ;
 	-moz-transform: scale(1.1,1.1) rotate(360deg) ;
@@ -48,7 +48,7 @@
 	transform: scale(1.1,1.1) ;
 }
 .about .lead{
-	color: #CC0039;
+	color:#044570;
 	font-size: 14px;
 	font-weight: bold;
 }

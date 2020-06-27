@@ -6147,13 +6147,13 @@
     }
     
     .bg-dark {
-      background-color: #343a40 !important;
+      background-color: #2874A6   !important;
     }
     
     a.bg-dark:hover, a.bg-dark:focus,
     button.bg-dark:hover,
     button.bg-dark:focus {
-      background-color: #1d2124 !important;
+      background-color: #2874A6   !important;
     }
     
     .bg-white {

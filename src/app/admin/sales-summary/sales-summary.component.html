@@ -2,23 +2,24 @@
     <h2>SALES SUMMARY</h2>
 </div>
 
-<div>
-  <button class="btn" style="float: right;" (click)="showGraph()"> {{showGraphFlag ? "See Table" : "See Graph"}}</button>
-</div>
-<div class="row" style="width: 100%;">
-  <div class="form-inline mr-auto" style="padding-left: 20px;">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search Product..." aria-label="Search" [(ngModel)]="listFilter">
-    <i class="fas fa-search" aria-hidden="true"></i>
+
+<div class="row">
+  <div>
+    <input class="form-control" style="width: 120px;" type="text" placeholder="Search Product..." aria-label="Search" [(ngModel)]="listFilter">
+    
   </div>
 
-  <form class="form-inline mr-5" (ngSubmit)="getOrders()" [formGroup]="rangeForm">
-    <label> Enter start and end date: 
-      <input class="form-control mr-sm-5" type="date" placeholder="Start Date" formControlName="startDate"> 
+  <form class="form-inline" style="margin-left: 190px;" (ngSubmit)="getOrders()" [formGroup]="rangeForm">
+    <label style="padding-right: 20px;"> Enter start and end date: 
+      <input class="form-control" type="date" placeholder="Start Date" formControlName="startDate"> 
     </label>
     <label>To
       <input class="form-control mr-sm-2" type="date" placeholder="End Date" aria-label="Date" formControlName="endDate">
     </label>
     <button type="submit" class="btn">Go</button>
+    <div>
+      <button class="btn" style="float: right;" (click)="showGraph()"> {{showGraphFlag ? "See Table" : "See Graph"}}</button>
+    </div>
   </form>
 </div>
 

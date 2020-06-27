@@ -20,7 +20,7 @@ body {
 }
 
 .right-card {
-    border-top: 10px blue solid;
+    border-top: 10px #2874A6 solid;
     padding-top: 1rem;
     width: fit-content
 }

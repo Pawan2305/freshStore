@@ -3909,13 +3909,13 @@
       text-decoration: none;
     }
     .nav-link.disabled {
-      color: #6c757d;
+      color: #ffffff;
       pointer-events: none;
       cursor: default;
     }
     
     .nav-tabs {
-      border-bottom: 1px solid #dee2e6;
+      border-bottom: 1px solid #ffffff;
     }
     .nav-tabs .nav-item {
       margin-bottom: -1px;
@@ -3929,13 +3929,13 @@
       border-color: #e9ecef #e9ecef #dee2e6;
     }
     .nav-tabs .nav-link.disabled {
-      color: #6c757d;
+      color: #ffffff;
       background-color: transparent;
       border-color: transparent;
     }
     .nav-tabs .nav-link.active,
     .nav-tabs .nav-item.show .nav-link {
-      color: #495057;
+      color: #ffffff;
       background-color: #fff;
       border-color: #dee2e6 #dee2e6 #fff;
     }
@@ -10167,7 +10167,7 @@
     }
     
     .sb-sidenav-dark {
-      background-color: #212529;
+      background-color: #154360 ;
       color: rgba(255, 255, 255, 0.5);
     }
     .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
@@ -10200,7 +10200,7 @@
       color: #212529;
     }
     .sb-sidenav-light .sb-sidenav-menu .sb-sidenav-menu-heading {
-      color: #adb5bd;
+      color: #ffffff;
     }
     .sb-sidenav-light .sb-sidenav-menu .nav-link {
       color: #212529;
