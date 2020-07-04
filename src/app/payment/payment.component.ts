@@ -18,7 +18,7 @@ export class PaymentComponent implements OnInit {
   deliveryCharge: number = 0;
   total: number = 0;
   isPaymentMethodSelected = true;
-  paymentMethod = '';
+  paymentMethod = 'Cash';
   
   
 

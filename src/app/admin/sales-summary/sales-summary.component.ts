@@ -21,6 +21,7 @@ export class SalesSummaryComponent implements OnInit {
   orders: Orders[] = [];
   totalSale: number = 0;
   showGraphFlag: boolean = false;
+  noData: boolean = false;
 
   
   _listFilter = '';
@@ -56,10 +57,8 @@ export class SalesSummaryComponent implements OnInit {
 
     this.products = this.productService.product.map(prod =>{
       const qtySale = (+prod.totalQty)-(+prod.qtyRemain);
-      console.log(qtySale);
       const totalAmt = qtySale * (+prod.pricePerKg);
       this.totalSale = this.totalSale + totalAmt;
-      console.log(totalAmt);
       return {
         ...prod,
         totalQtySale: qtySale,
@@ -68,8 +67,6 @@ export class SalesSummaryComponent implements OnInit {
     });  
     this.filteredProducts = this.products;
     this.products = this.products.filter(item => item.totalQtySale !== 0);
-   
-    console.log(this.products);  
   }
 
   onBack(){
@@ -80,43 +77,33 @@ export class SalesSummaryComponent implements OnInit {
     this.orders = [];
     let totalProduct: TotalProducts[] = [];
     this.totalSale = 0;
-    console.log(this.rangeForm.value);
-    let sDate = formatDate(this.rangeForm.get('startDate').value, 'dd-MM-yyyy', 'en-US', '+0530');
-    let startDate: date = this.getDateFormat(sDate);
-
-    let eDate = formatDate(this.rangeForm.get('endDate').value, 'dd-MM-yyyy', 'en-US', '+0530');
-    let endDate: date = this.getDateFormat(eDate);
-
-    console.log(startDate);
-    console.log(endDate);
+    let startDate = new Date(this.rangeForm.get('startDate').value)
+  
+    let endDate = new Date(this.rangeForm.get('endDate').value);
 
     this.orderService.getDeliveredOrders().subscribe(
       res =>{
         res.forEach(order => {
-          console.log(order);
           const date = this.getDateFormat(order.deliveryDate);
-          if((date.day >= startDate.day && date.month>= startDate.month && date.year >= startDate.year) && (date.day <= endDate.day && date.month <= endDate.month && date.year <= endDate.year)){
-            console.log(order.orderId+" included in order list");
+          const delDate = new Date(date.year,date.month-1, date.day);
+          if((startDate<delDate) && (endDate>delDate)){
             this.orders.push(order);
           }
         });
-        console.log(this.orders);
         if(this.orders.length === 0){
-
+          this.noData = true;
         }else{
+          this.noData = false;
           this.orders.forEach(order =>{
             this.orderService.getOrderDetails(order.orderId).subscribe(
               result =>{
-                console.log(result);
                 result.forEach(item =>{
                   let product: Products = this.productService.product.find(prod => prod.productId === item.productId);
-                  console.log(product);
                   if(totalProduct.length === 0){
                     const totalQ = (+item.quantity);
                     const totAmt = totalQ * (+product.pricePerKg);
                     let p: TotalProducts = {...product, totalQtySale: totalQ, totalEarnings: totAmt };
                     totalProduct.push(p);
-                    console.log(totalProduct);
                   }else{
                     let exist = totalProduct.find(prod => prod.productId === item.productId);
                     if(exist){
@@ -130,22 +117,19 @@ export class SalesSummaryComponent implements OnInit {
                           return prod;
                         }
                       });
-                      console.log(totalProduct);
                     }else{
                       const totalQ = (+item.quantity);
                       const totAmt = totalQ * (+product.pricePerKg);
                       let p: TotalProducts = {...product, totalQtySale: totalQ, totalEarnings: totAmt };
                       totalProduct.push(p);
-                      console.log(totalProduct);
                     }
                   }
 
                 });
                 this.totalSale =0;
-                console.log(totalProduct);
                 totalProduct.forEach(item =>  this.totalSale = this.totalSale + item.totalEarnings );
                 this.products = totalProduct;
-
+                this.filteredProducts = this.products;
             });
           });
         }
